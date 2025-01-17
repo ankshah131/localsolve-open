@@ -1,1 +1,1 @@
-# localsolve-open
+# LocalSolve Open Source Repository
