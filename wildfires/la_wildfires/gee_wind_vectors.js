@@ -1,50 +1,52 @@
-// Function to visualize wind vectors for a given region and date range
-function visualize_wind_vectors(region, start_date, end_date, num_samples) {
-  // Load wind data
-  var uv = ee.ImageCollection('NOAA/GFS0P25')
-    .select(['u_component_of_wind_10m_above_ground', 'v_component_of_wind_10m_above_ground'])
-    .filterDate(start_date, end_date);
+// Charger les données des limites administratives des comtés des États-Unis
+var counties = ee.FeatureCollection('TIGER/2018/Counties');
 
-  // Get the first image and rename bands
-  var uv0 = uv.first().rename(['u', 'v']);
+// Filtrer pour le comté de Los Angeles
+var losAngelesCounty = counties.filter(ee.Filter.eq('NAME', 'Los Angeles')).geometry();
 
-  // Sample wind data
-  var scale = 25000; // 25 km per pixel
-  var samples = uv0.sample({
-    region: region,
-    scale: scale,
-    numPixels: num_samples,
-    geometries: true
-  });
+// Visualiser le comté de Los Angeles sur la carte
+Map.centerObject(losAngelesCounty, 9);
+Map.addLayer(losAngelesCounty, {color: 'blue'}, 'Los Angeles County Boundary');
 
-  // Create wind vectors (arrows)
-  var createArrows = function(feature) {
-    var u = feature.get('u');
-    var v = feature.get('v');
-    var coords = ee.Geometry(feature.geometry()).coordinates();
-    var scaleFactor = 0.1; // Normalize arrow length
-    var arrowEnd = [
-      ee.Number(coords.get(0)).add(ee.Number(u).multiply(scaleFactor)),
-      ee.Number(coords.get(1)).add(ee.Number(v).multiply(scaleFactor))
-    ];
-    return ee.Feature(ee.Geometry.LineString([coords, arrowEnd]), feature.toDictionary());
-  };
+// Charger les données de vent NOAA GFS
+var uv = ee.ImageCollection('NOAA/GFS0P25')
+  .select(['u_component_of_wind_10m_above_ground', 'v_component_of_wind_10m_above_ground'])
+  .filterDate('2025-01-01', Date.now()); // Période d'analyse des vents
 
-  // Apply the function to create arrows
-  var arrows = samples.map(createArrows);
+// Sélectionner la première image et renommer les bandes pour simplifier
+var uv0 = uv.first().rename(['u', 'v']);
 
-  // Add arrows to the map
-  Map.addLayer(arrows, {color: 'blue'}, 'Wind Vectors');
-}
+// Définir les paramètres d'échantillonnage
+var scale = 5000; // Résolution de 5 km par pixel
+var numPixels = 200; // Limiter à 200 points pour éviter une surcharge
 
-// Example: Visualize wind vectors for California
-var california = ee.FeatureCollection('TIGER/2018/States')
-  .filter(ee.Filter.eq('NAME', 'California'))
-  .geometry();
-  
+// Échantillonner les données de vent dans la région de Los Angeles
+var samples = uv0.sample({
+  region: losAngelesCounty, // Région : comté de Los Angeles
+  scale: scale,             // Résolution d'échantillonnage
+  numPixels: numPixels,     // Nombre maximal de points échantillonnés
+  geometries: true          // Inclure les coordonnées géographiques
+});
 
-// Set the  dates
-var startDate= '2025-01-07'
-var endDate = ee.Date(Date.now());
+// Fonction pour créer des vecteurs de vent (flèches)
+var createArrows = function(feature) {
+  var u = feature.get('u'); // Composante est-ouest du vent
+  var v = feature.get('v'); // Composante nord-sud du vent
+  var coords = ee.Geometry(feature.geometry()).coordinates(); // Coordonnées du point
 
-visualize_wind_vectors(california, startDate, endDate, 500);
+  // Normaliser la longueur des flèches
+  var scaleFactor = 0.1; // Ajuster le facteur d'échelle pour la longueur
+  var arrowEnd = [
+    ee.Number(coords.get(0)).add(ee.Number(u).multiply(scaleFactor)),
+    ee.Number(coords.get(1)).add(ee.Number(v).multiply(scaleFactor))
+  ];
+
+  // Créer une ligne représentant la flèche
+  return ee.Feature(ee.Geometry.LineString([coords, arrowEnd]), feature.toDictionary());
+};
+
+// Appliquer la fonction pour créer les vecteurs (flèches)
+var arrows = samples.map(createArrows);
+
+// Ajouter les vecteurs de vent (flèches) à la carte
+Map.addLayer(arrows, {color: 'blue'}, 'Wind Vectors (Arrows)');
