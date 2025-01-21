@@ -8,7 +8,7 @@ dependencies:
   - dask
   - streamlit
   - holoviews
-
+  - boto3
   # Dev
   - jupyterlab
   - pre_commit
