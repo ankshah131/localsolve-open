@@ -16,26 +16,12 @@
 // to Los Angeles, CA, US where wildfires occurred in January 2025. 
 // --> Remove the comment-symbol (//) below to so Earth Engine recognizes the polygon.
 
-var geometry = 
-    /* color: #d63000 */
-    /* shown: false */
-    /* displayProperties: [
-      {
-        "type": "rectangle"
-      },
-      {
-        "type": "rectangle"
-      }
-    ] */
-    ee.Geometry.MultiPolygon(
-        [[[[-118.7341914264289, 34.20097725678486],
-           [-118.7341914264289, 33.99059095699506],
-           [-118.36271620670233, 33.99059095699506],
-           [-118.36271620670233, 34.20097725678486]]],
-         [[[-118.36207307571594, 34.385825361566354],
-           [-118.36207307571594, 34.09917545582345],
-           [-117.926053178255, 34.09917545582345],
-           [-117.926053178255, 34.385825361566354]]]], null, false);
+// var geometry = 
+//     ee.Geometry.Polygon(
+//         [[[-118.7341914264289, 34.1657598213888],
+//           [-118.7341914264289, 33.99059095699506],
+//           [-118.47326613346014, 33.99059095699506],
+//           [-118.47326613346014, 34.1657598213888]]], null, false);
 
 // Now hit Run to start the demo! 
 // Do not forget to delete/outcomment this geometry before creating a new one!
@@ -60,7 +46,7 @@ var prefire_end = '2025-01-05';
 
 // Now set the same parameters for AFTER the fire.
 var postfire_start = '2025-01-07';
-var postfire_end = '2025-01-15';
+var postfire_end = '2025-01-17';
 
 // Used for Sentinel 2 cloud masking
 var MAX_CLOUD_PROBABILITY = 65;
@@ -311,6 +297,8 @@ Map.addLayer(dNBR.sldStyle(sld_intervals), {}, 'dNBR classified');
 var thresholds = ee.Image([-1000, -251, -101, 99, 269, 439, 659, 2000]);
 var classified = dNBR.lt(thresholds).reduce('sum').toInt();
 
+Map.addLayer(classified, {}, 'Classified dNBR')
+
 //==========================================================================================
 //                              ADD BURNED AREA STATISTICS
 
@@ -414,13 +402,111 @@ for (var i = 0; i < 8; i++) {
 // add legend to map (alternatively you can also print the legend to the console)
 Map.add(legend);
 
+// Fire Perimeters from NIFC 
+var perimeters = ee.FeatureCollection('projects/localsolve/assets/los_angeles_fires/LA_CA_Perimeters_NIFC_FIRIS_public_view')
+.filterBounds(geometry)
+
+Map.addLayer(perimeters, {}, 'Raw Perimeters')
+
+// Define the start and end of the year 2025 in milliseconds
+var startDate = ee.Date.fromYMD(2025, 1, 1).millis();
+var endDate = ee.Date.fromYMD(2026, 1, 1).millis();
+
+// Filter the FeatureCollection to include only features from 2025
+var perimeters_2025 = perimeters.filter(ee.Filter.gte('CreationDa', startDate))
+                   .filter(ee.Filter.lt('CreationDa', endDate));
+
+var mergedGeometry = perimeters_2025.geometry().dissolve();
+
+// Extract individual merged polygons
+var mergedPolygons = mergedGeometry.geometries();
+
+// Function to assign properties from an overlapping feature
+// var assignProperties = function(geom) {
+//     var polygon = ee.Geometry(geom);
+    
+//     // Find features that intersect this merged polygon
+//     var intersectingFeatures = perimeters_2025.filterBounds(polygon);
+    
+//     // Select one of the overlapping features (e.g., first one)
+//     var representativeFeature = intersectingFeatures.first();
+    
+//     // Assign properties from the representative feature to the merged polygon
+//     return ee.Feature(polygon).set(representativeFeature.toDictionary());
+// };
+
+// Function to assign properties from an overlapping feature
+var assignProperties = function(geom) {
+    var polygon = ee.Geometry(geom);
+    
+    // Find features that intersect this merged polygon
+    var intersectingFeatures = perimeters_2025.filterBounds(polygon);
+    
+    // Select one of the overlapping features (e.g., first one)
+    var representativeFeature = ee.Feature(intersectingFeatures.first());
+    
+    // Remove 'area_acres' property if it exists
+    var properties = representativeFeature.toDictionary()
+        .remove(['area_acres']);  // Remove the old area property
+    
+    // Calculate the new area in acres (1 acre = 4046.86 m²)
+    var areaSqMeters = polygon.area();
+    var areaAcres = areaSqMeters.divide(4046.86);
+    
+    // Assign properties and add the new 'area_acres'
+    return ee.Feature(polygon).set(properties).set('area_acres', areaAcres);
+};
+
+// Convert merged polygons into a FeatureCollection with properties
+var merged_perimeters_2025 = ee.FeatureCollection(mergedPolygons.map(assignProperties));
+
+Map.addLayer(merged_perimeters_2025, {}, 'Merged Perimeters')
+
+// Santa Monica Species
+var santa_monica_species = ee.FeatureCollection('projects/localsolve/assets/los_angeles_fires/Santa_Monica_Vegetation_Map')
+santa_monica_species = santa_monica_species.filterBounds(geometry)
+
+Map.addLayer(santa_monica_species)
+
+//Invasive species 
+
+var calveg = ee.FeatureCollection('projects/localsolve/assets/los_angeles_fires/LA_Current_InvasivePlants')
+Map.addLayer(calveg, {}, 'Invasive Species')
+
 //==========================================================================================
 //                                  PREPARE FILE EXPORT
 
 var id = dNBR.id().getInfo();
       
-Export.image.toDrive({image: dNBR, scale: 30, description: id, fileNamePrefix: 'dNBR',
-  region: area, maxPixels: 1e10});
+Export.image.toDrive({image: dNBR, scale: 10, description: id, fileNamePrefix: 'dNBR Greyscale',
+  region: area, maxPixels: 1e13});
+  
+Export.image.toDrive({image: classified, scale: 10, description: id, fileNamePrefix: 'dNBR Classified',
+  region: area, maxPixels: 1e13});
 
+Export.image.toAsset({
+  image: dNBR,
+  description: '_dNBR_Greyscale',
+  assetId: 'projects/localsolve/assets/los_angeles_fires/dNBR_Greyscale_Jan_2025',
+  scale: 10,
+  region: area,
+  maxPixels: 1e13
+});
 
-// Downloads will be availible in the 'Tasks'-tab on the right.
+Export.image.toAsset({
+  image: classified,
+  description: '_dNBR_Classified',
+  assetId: 'projects/localsolve/assets/los_angeles_fires/dNBR_Classified_Jan_2025',
+  scale: 10,
+  region: area,
+  maxPixels: 1e13
+});
+
+// TESTING EXPORTS with original
+
+// var dnbr_grey = ee.Image('projects/localsolve/assets/los_angeles_fires/dNBR_Greyscale_Jan_2025')
+// var dnbr_classified = ee.Image('projects/localsolve/assets/los_angeles_fires/dNBR_Classified_Jan_2025')
+
+// Map.addLayer(dnbr_grey)
+// Map.addLayer(dnbr_classified)
+// Downloads will be available in the 'Tasks'-tab on the right.
