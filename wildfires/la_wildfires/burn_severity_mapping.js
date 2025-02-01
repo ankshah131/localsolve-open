@@ -155,6 +155,12 @@ function maskEdges(s2_img) {
       s2_img.select('B8A').mask().updateMask(s2_img.select('B9').mask()));
 }
 
+function maskWater(img) {
+  var scl = img.select('SCL');
+  var water_mask = scl.neq(6); // Water is class 6
+  return img.updateMask(water_mask);
+}
+
 // Function to mask clouds from the pixel quality band of Landsat 8 SR data.
 function maskL8sr(image) {
   // Bits 3 and 4 are cloud shadow and snow, respectively. (eq(0))
@@ -189,13 +195,11 @@ if (platform == 'S2' | platform == 's2') {
     condition:
         ee.Filter.equals({leftField: 'system:index', rightField: 'system:index'})
   });
-  var prefire_CM_ImCol = ee.ImageCollection(prefires2SrWithCloudMask).map(maskClouds);
-  var postfire_CM_ImCol = ee.ImageCollection(postfires2SrWithCloudMask).map(maskClouds);
-  // var prefire_CM_ImCol = prefireImCol.map(maskS2sr);
-  // var postfire_CM_ImCol = postfireImCol.map(maskS2sr);
+  var prefire_masked_ImCol = ee.ImageCollection(prefires2SrWithCloudMask).map(maskClouds).map(maskWater);
+  var postfire_masked_ImCol = ee.ImageCollection(postfires2SrWithCloudMask).map(maskClouds).map(maskWater);
 } else {
-  var prefire_CM_ImCol = prefireImCol.map(maskL8sr);
-  var postfire_CM_ImCol = postfireImCol.map(maskL8sr);
+  var prefire_masked_ImCol = prefireImCol.map(maskL8sr);
+  var postfire_masked_ImCol = postfireImCol.map(maskL8sr);
 }
 
 //----------------------- Mosaic and clip images to study area -----------------------------
@@ -206,8 +210,8 @@ if (platform == 'S2' | platform == 's2') {
 var pre_mos = prefireImCol.mosaic().clip(area);
 var post_mos = postfireImCol.mosaic().clip(area);
 
-var pre_cm_mos = prefire_CM_ImCol.mosaic().clip(area);
-var post_cm_mos = postfire_CM_ImCol.mosaic().clip(area);
+var pre_cm_mos = prefire_masked_ImCol.mosaic().clip(area);
+var post_cm_mos = postfire_masked_ImCol.mosaic().clip(area);
 
 // Add the clipped images to the console on the right
 print("Pre-fire True Color Image: ", pre_mos); 
