@@ -128,7 +128,6 @@ class WildfireAnalysisDashboard:
     def create_severity_analysis(self):
         col1, col2 = st.columns([3, 2])
         with col1:
-            # Burn severity map
             severity_layer = pdk.Layer(
                 "ScatterplotLayer",
                 data=self.burn_severity,
@@ -232,10 +231,7 @@ class WildfireAnalysisDashboard:
             st.plotly_chart(fig, use_container_width=True)
 
     def run(self):
-
-        
         st.title("LA Wildfire Impact App")
-
 
         st.markdown("""
         <div style='background-color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #333;'>
@@ -245,7 +241,6 @@ class WildfireAnalysisDashboard:
         </div>
         """, unsafe_allow_html=True)
 
-        # Key metrics with improved visual separation
         cols = st.columns(4)
         with cols[0]:
             st.metric("Total Burned Area", f"{self.burn_severity['area_acres'].sum():,.0f} acres", "Critical", delta_color="inverse")
@@ -256,7 +251,6 @@ class WildfireAnalysisDashboard:
         with cols[3]:
             st.metric("Active Fire Perimeters", "5", "Expanding", delta_color="inverse")
 
-        # Create main analysis sections with tabs
         tab1, tab2, tab3 = st.tabs(["Burn Severity", "Vegetation Analysis", "Fire Progression & Infrastructure"])
         with tab1:
             self.create_severity_analysis()
