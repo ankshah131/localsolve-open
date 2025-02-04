@@ -13,7 +13,7 @@ class DataLoader:
         self.load_infrastructure()
     
     def load_burn_severity(self):
-        self.burn_severity = pd.DataFrame({
+        self.burn_severity = pd.DataFrame({    #  to be replaced with reading from a file (eg. csv/json)
             'severity': ['High', 'Medium', 'Low'] * 100,
             'latitude': np.random.uniform(34.0, 34.2, 300),
             'longitude': np.random.uniform(-118.4, -118.2, 300),
@@ -24,7 +24,7 @@ class DataLoader:
         species_list = ['Coast Live Oak', 'California Bay', 'Monterey Pine', 
                        'Eucalyptus', 'Western Sycamore']
         n_trees = 100
-        self.tree_species = pd.DataFrame({
+        self.tree_species = pd.DataFrame({     #  to be replaced with reading from a file (eg. csv/json)
             'species': np.repeat(species_list, n_trees // len(species_list)),
             'latitude': np.random.uniform(34.0, 34.2, n_trees),
             'longitude': np.random.uniform(-118.4, -118.2, n_trees),
@@ -34,7 +34,7 @@ class DataLoader:
 
     def load_infrastructure(self):
         n_infra = 20
-        self.infrastructure = pd.DataFrame({
+        self.infrastructure = pd.DataFrame({    #  to be replaced with reading from a file (eg. csv/json)
             'type': np.repeat(['Hospital', 'School', 'Highway', 'Power Station'], 
                             n_infra // 4),
             'latitude': np.random.uniform(34.0, 34.2, n_infra),
