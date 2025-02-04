@@ -26,12 +26,12 @@ COLORS = {
 }
 
 # Data Settings
-DATA_SETTINGS = {
+DATA_SETTINGS = {         
     'DATE_RANGE': {
         'start': '2024-01-20',
         'end': '2024-02-03'
     },
-    'SAMPLE_SIZES': {
+    'SAMPLE_SIZES': {       #    - to be replaced with reading from a file (eg. csv/json)
         'burn_severity': 300,
         'tree_species': 100,
         'infrastructure': 20
@@ -50,7 +50,7 @@ TREE_SPECIES = [
     'Western Sycamore'
 ]
 
-# Invasive Species
+# Invasive Species  - to be replaced with reading from a file (eg. csv/json)
 INVASIVE_SPECIES = [
     {
         'name': 'Yellow Star Thistle',
