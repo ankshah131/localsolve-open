@@ -23,7 +23,7 @@ class VegetationAnalysis:
         ]).update_layout(barmode='stack')
 
     def create_invasive_species_chart(self):
-        invasive_data = pd.DataFrame({
+        invasive_data = pd.DataFrame({       #  to be replaced with reading from a file (eg. csv/json)
             'Species': ['Yellow Star Thistle', 'Pampas Grass', 'French Broom', 
                        'Ice Plant', 'Tree of Heaven'],
             'Risk_Score': [9.5, 8.7, 8.4, 7.2, 8.9],
