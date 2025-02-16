@@ -16,7 +16,7 @@ class DataLoader:
         self.trees_withburn = pd.read_csv("data/LATreeswithburn_new.csv")
         self.trees_processed = pd.read_csv("data/LATrees_processed.csv")
     
-    def load_burn_severity(self):
+    def load_burn_severity(self):      #this should be replaced/deleted in the future
         self.burn_severity = pd.DataFrame({
             'severity': ['High', 'Medium', 'Low'] * 100,
             'latitude': np.random.uniform(34.0, 34.2, 300),
@@ -24,7 +24,7 @@ class DataLoader:
             'area_acres': np.random.uniform(10, 100, 300)
         })
 
-    def load_tree_species(self):
+    def load_tree_species(self):   #this should be replaced/deleted in the future
         species_list = ['Coast Live Oak', 'California Bay', 'Monterey Pine', 
                        'Eucalyptus', 'Western Sycamore']
         n_trees = 100
@@ -36,7 +36,7 @@ class DataLoader:
                                             n_trees // 3 + 1)[:n_trees]
         })
 
-    def load_infrastructure(self):
+    def load_infrastructure(self):   #this should be replaced/deleted in the future
         n_infra = 20
         self.infrastructure = pd.DataFrame({
             'type': np.repeat(['Hospital', 'School', 'Highway', 'Power Station'], 
