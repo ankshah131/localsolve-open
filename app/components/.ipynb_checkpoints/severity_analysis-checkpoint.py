@@ -1,7 +1,19 @@
 import streamlit as st
 import folium
 import requests
-from streamlit_folium import st_folium  # Add this import
+from streamlit_folium import st_folium
+
+# Define burn severity classes with corresponding colors
+BURN_SEVERITY_CLASSES = {
+    "Enhanced Regrowth, High": "#7a8737",
+    "Enhanced Regrowth, Low": "#acbe4d",
+    "Unburned": "#0ae042",
+    "Low Severity": "#fff70b",
+    "Moderate-low Severity": "#ffaf38",
+    "Moderate-high Severity": "#ff641b",
+    "High Severity": "#a41fd6",
+    "NA": "#ffffff"
+}
 
 class SeverityAnalysis:
     def __init__(self, data_loader=None):
@@ -76,6 +88,36 @@ class SeverityAnalysis:
         
         return m
 
+    def create_legend(self):
+        """Create and display the burn severity legend."""
+        # Add CSS to style the legend
+        st.markdown("""
+            <style>
+            .legend-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 8px;
+            }
+            .color-box {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                border: 1px solid #ccc;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        
+        st.subheader("Burn Severity Legend")
+        # Create legend items
+        for label, color in BURN_SEVERITY_CLASSES.items():
+            st.markdown(
+                f'<div class="legend-item">'
+                f'<div class="color-box" style="background-color: {color};"></div>'
+                f'<span>{label}</span>'
+                f'</div>',
+                unsafe_allow_html=True
+            )
+
     def display(self):
         st.title("LA Fires Burn Severity Analysis")
         
@@ -99,8 +141,10 @@ class SeverityAnalysis:
             """)
             
             st.info("Click on fire perimeters to view details about each fire mission.")
+            
+            # Add the legend below the map controls
+            self.create_legend()
 
-# Main app
 def main():
     st.set_page_config(layout="wide")
     analysis = SeverityAnalysis()
@@ -108,7 +152,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
