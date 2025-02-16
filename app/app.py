@@ -54,13 +54,10 @@ class WildfireAnalysisDashboard:
                 This app was created as part of the PlanetSapling LocalSolve Initiative by a group of Data Scientists: 
                 <br>
                 <strong>Ankur Shah (USA)</strong>, 
+                <strong>Magdalena Kortas (AU)</strong>,
                 <strong>Keenan Eves (USA)</strong>, 
                 <strong>Palak Agarwal (USA)</strong>, 
-                <strong>Manuel A</strong>, 
-                <strong>Kabir</strong>, 
-                <strong>Aurelien Callens (FR)</strong>, 
-                <strong>Vanesa Martin (USA)</strong>, 
-                <strong>Magdalena Kortas (AU)</strong>.
+                <strong>Vanesa Martin (USA)</strong>.
             </p>
         </div>
         """, unsafe_allow_html=True)
