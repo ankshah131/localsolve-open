@@ -6,3 +6,4 @@ numpy
 Pillow 
 folium
 geopandas
+streamlit_folium
