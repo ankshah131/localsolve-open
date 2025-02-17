@@ -3,7 +3,7 @@ from data.data_loader import DataLoader
 from utils.styling import setup_styling
 from components.severity_analysis import SeverityAnalysis
 from components.vegetation_analysis import VegetationAnalysis
-from components.fire_progression import FireProgression
+from components.fire_progression import FireDataLoader, FireProgression
 from components.veg_burn import VegBurn
 
 
@@ -11,12 +11,13 @@ class WildfireAnalysisDashboard:
     def __init__(self):
         st.set_page_config(layout="wide", page_title="LA Wildfire Analysis")
         self.data_loader = DataLoader()
+        self.fire_data_loader = FireDataLoader()
         setup_styling()
         
         # Initialize components
         self.severity_analysis = SeverityAnalysis(self.data_loader)
         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
-        self.fire_progression = FireProgression(self.data_loader)
+        self.fire_progression = FireProgression(self.fire_data_loader)
         self.veg_burn = VegBurn()
 
     def display_header(self):
