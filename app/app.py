@@ -4,6 +4,8 @@ from utils.styling import setup_styling
 from components.severity_analysis import SeverityAnalysis
 from components.vegetation_analysis import VegetationAnalysis
 from components.fire_progression import FireProgression
+from components.veg_burn import VegBurn
+
 
 class WildfireAnalysisDashboard:
     def __init__(self):
@@ -15,6 +17,7 @@ class WildfireAnalysisDashboard:
         self.severity_analysis = SeverityAnalysis(self.data_loader)
         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
         self.fire_progression = FireProgression(self.data_loader)
+        self.veg_burn = VegBurn()
 
     def display_header(self):
         st.title("LA Wildfire Impact App")
@@ -66,10 +69,11 @@ class WildfireAnalysisDashboard:
         self.display_header()
         self.display_metrics()
 
-        tab1, tab2, tab3 = st.tabs([
+        tab1, tab2, tab3, tab4 = st.tabs([
             "Burn Severity", 
             "Vegetation Analysis", 
-            "Fire Progression & Infrastructure"
+            "Fire Progression & Infrastructure",
+            "Vegetation Burn Severity"
         ])
         
         with tab1:
@@ -78,6 +82,8 @@ class WildfireAnalysisDashboard:
             self.vegetation_analysis.display()
         with tab3:
             self.fire_progression.display()
+        with tab4:
+            self.veg_burn.display()
 
         self.display_footer()
 

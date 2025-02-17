@@ -18,15 +18,18 @@ BURN_SEVERITY_CLASSES = {
 class SeverityAnalysis:
     def __init__(self, data_loader=None):
         self.data_loader = data_loader
-        self.TILE_URL_PRE_BURN = "https://storage.googleapis.com/localsolve_assets/S2_LA_Pre_Burn/{z}/{x}/{y}.png"
-        self.TILE_URL_POST_BURN = "https://storage.googleapis.com/localsolve_assets/S2_LA_Burned_Area/{z}/{x}/{y}.png"
-        self.TILE_BURN_SEVERITY = "https://storage.googleapis.com/localsolve_assets/dNBR_Classified_Colored_Tiles/{z}/{x}/{y}.png"
+        self.TILE_URL_PRE_BURN = "https://storage.googleapis.com/localsolve_assets/S2_LA_Pre_Burn_High_Zoom/{z}/{x}/{y}.png"
+        self.TILE_URL_POST_BURN = "https://storage.googleapis.com/localsolve_assets/S2_LA_Post_Burn_High_Zoom/{z}/{x}/{y}.png"
+        self.TILE_BURN_SEVERITY = "https://storage.googleapis.com/localsolve_assets/dNBR_Classified_Colored_Tiles_High_Zoom/{z}/{x}/{y}.png"
         self.GEOJSON_URL = "https://storage.googleapis.com/localsolve_assets/merged_LA_fires_2025.geojson"
+
+
+        
 
     def create_map(self):
         # Create a Folium map centered on Los Angeles
         m = folium.Map(location=[34.0486, -118.5267], 
-                      zoom_start=14, 
+                      zoom_start=15, min_zoom=6,max_zoom=14, max_bounds=True,
                       tiles="cartodbpositron")
         
         # Add pre-burn layer
@@ -37,7 +40,6 @@ class SeverityAnalysis:
             overlay=True
         ).add_to(m)
         
-        # Add post-burn layer
         folium.TileLayer(
             tiles=self.TILE_URL_POST_BURN,
             attr="Sentinel-2 Post-Burn Imagery",
@@ -45,7 +47,6 @@ class SeverityAnalysis:
             overlay=True
         ).add_to(m)
         
-        # Add burn severity layer
         folium.TileLayer(
             tiles=self.TILE_BURN_SEVERITY,
             attr="Sentinel-2 Burn Severity",
@@ -53,37 +54,32 @@ class SeverityAnalysis:
             overlay=True
         ).add_to(m)
         
-        # Fetch and add GeoJSON data
-        try:
-            response = requests.get(self.GEOJSON_URL)
-            if response.status_code == 200:
-                geojson_data = response.json()
-                
-                # Create a FeatureGroup for the polygons
-                polygon_layer = folium.FeatureGroup(
-                    name="Fire Perimeters", 
-                    overlay=True
-                ).add_to(m)
-                
-                # Add GeoJSON layer
-                folium.GeoJson(
-                    geojson_data,
-                    name="Fire Perimeters",
-                    style_function=lambda feature: {
-                        "fillColor": "red",
-                        "color": "black",
-                        "weight": 1,
-                        "fillOpacity": 0.4
-                    },
-                    tooltip=folium.GeoJsonTooltip(
-                        fields=["mission", "area_acres", "source"],
-                        aliases=["Mission Name", "Area (acres)", "Source"]
-                    )
-                ).add_to(polygon_layer)
-        except Exception as e:
-            st.error(f"Error loading GeoJSON data: {str(e)}")
-            
-        # Add layer control
+        
+        # Fetch GeoJSON data
+        response = requests.get(self.GEOJSON_URL)
+        if response.status_code == 200:
+            geojson_data = response.json()
+        
+            # Create a FeatureGroup for the polygons
+            polygon_layer = folium.FeatureGroup(name="Fire Perimeters", overlay=True).add_to(m)
+        
+            # Add GeoJSON layer
+            folium.GeoJson(
+                geojson_data,
+                name="Fire Perimeters",
+                style_function=lambda feature: {
+                    "fillColor": "red",
+                    "color": "black",
+                    "weight": 1,
+                    "fillOpacity": 0.4
+                },
+                tooltip=folium.GeoJsonTooltip(
+                    fields=["mission", "area_acres", "source"],  # Customize tooltip fields
+                    aliases=["Mission Name", "Area (acres)", "Source"]
+                )
+            ).add_to(polygon_layer)
+        
+        # Add layer control to toggle between layers
         folium.LayerControl().add_to(m)
         
         return m
