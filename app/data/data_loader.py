@@ -3,6 +3,7 @@ import numpy as np
 import requests
 import io
 from datetime import datetime, timedelta
+from io import StringIO
 
 class DataLoader:
     def __init__(self):
