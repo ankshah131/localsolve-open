@@ -25,7 +25,7 @@ class WildfireAnalysisDashboard:
         st.markdown("""
         <div style='background-color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #333;'>
         <p style='font-size: 14px; color: #444;'>
-        LA Wildfire Impact App is a tool created by PlanetSapling LocalSolve Initiative for relief organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, vegetation damage, and infrastructure conditions, aiding in emergency response and recovery planning.
+        LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, vegetation damage, and infrastructure conditions, aiding in long term response and recovery planning.
         </p>
         </div>
         """, unsafe_allow_html=True)
@@ -61,6 +61,9 @@ class WildfireAnalysisDashboard:
                 <strong>Magdalena Kortas (AU)</strong>,
                 <strong>Keenan Eves (USA)</strong>, 
                 <strong>Palak Agarwal (USA)</strong>, 
+                <strong>Manuel Alafaa (NGA)</strong>,
+                <strong>Aurelien Callens (FRA)</strong>,
+                <strong>Kabir Ahamad (CAN)</strong>
                 <strong>Vanesa Martin (USA)</strong>.
             </p>
         </div>
