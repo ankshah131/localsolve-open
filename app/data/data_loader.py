@@ -107,28 +107,28 @@ class DataLoader:
     #         self.trees_processed = pd.DataFrame()
 
     def load_vegetation_data(self):
-    """Load vegetation and tree data from public Google Cloud URLs"""
-    try:
-        urls = {
-            "veg_processed": "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/Vegeation_withburn_mode_processed.csv",
-            "trees_withburn": "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/LATreeswithburn_new.csv",
-            "trees_processed": "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/LATrees_processed.csv",
-        }
-
-        for attr, url in urls.items():
-            response = requests.get(url)
-            if response.status_code == 200:
-                csv_data = StringIO(response.text)
-                setattr(self, attr, pd.read_csv(csv_data))
-            else:
-                print(f"Failed to fetch {attr} data from {url}")
-                setattr(self, attr, pd.DataFrame())
-
-    except Exception as e:
-        print(f"Error loading vegetation data: {str(e)}")
-        self.veg_processed = pd.DataFrame()
-        self.trees_withburn = pd.DataFrame()
-        self.trees_processed = pd.DataFrame()
+        """Load vegetation and tree data from public Google Cloud URLs"""
+        try:
+            urls = {
+                "veg_processed": "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/Vegeation_withburn_mode_processed.csv",
+                "trees_withburn": "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/LATreeswithburn_new.csv",
+                "trees_processed": "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/LATrees_processed.csv",
+            }
+    
+            for attr, url in urls.items():
+                response = requests.get(url)
+                if response.status_code == 200:
+                    csv_data = StringIO(response.text)
+                    setattr(self, attr, pd.read_csv(csv_data))
+                else:
+                    print(f"Failed to fetch {attr} data from {url}")
+                    setattr(self, attr, pd.DataFrame())
+    
+        except Exception as e:
+            print(f"Error loading vegetation data: {str(e)}")
+            self.veg_processed = pd.DataFrame()
+            self.trees_withburn = pd.DataFrame()
+            self.trees_processed = pd.DataFrame()
 
     def load_infrastructure(self):
         """Load infrastructure data"""
