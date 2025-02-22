@@ -17,13 +17,13 @@ class VegetationAnalysis:
                           'Area_of_Burn3', 'Area_of_Burn4']]
         
         return go.Figure(data=[
-            go.Bar(name='Severity 4', x=burn_data['Class_Cnam'], 
+            go.Bar(name='Low Severity', x=burn_data['Class_Cnam'], 
                   y=burn_data['Area_of_Burn4'], marker_color='#000000'),
-            go.Bar(name='Severity 3', x=burn_data['Class_Cnam'], 
+            go.Bar(name='Moderate-Low Severity', x=burn_data['Class_Cnam'], 
                   y=burn_data['Area_of_Burn3'], marker_color='#8B4513'),
-            go.Bar(name='Severity 2', x=burn_data['Class_Cnam'], 
+            go.Bar(name='Moderate-High Severity', x=burn_data['Class_Cnam'], 
                   y=burn_data['Area_of_Burn2'], marker_color='#FFA500'),
-            go.Bar(name='Severity 1', x=burn_data['Class_Cnam'], 
+            go.Bar(name='High Severity', x=burn_data['Class_Cnam'], 
                   y=burn_data['Area_of_Burn1'], marker_color='#FFFF00')
         ]).update_layout(
             barmode='stack',
