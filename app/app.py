@@ -73,21 +73,21 @@ class WildfireAnalysisDashboard:
         self.display_header()
         self.display_metrics()
 
-        tab1, tab2, tab3, tab4 = st.tabs([
+        tab1, tab2, tab3 = st.tabs([
             "Burn Severity", 
             "Vegetation Analysis", 
-            "Fire Progression & Infrastructure",
-            "Vegetation Burn Severity"
+            "Fire Progression & Infrastructure"
         ])
         
         with tab1:
             self.severity_analysis.display()
         with tab2:
+            self.veg_burn.display()
             self.vegetation_analysis.display()
         with tab3:
             self.fire_progression.display()
-        with tab4:
-            self.veg_burn.display()
+
+            
 
         self.display_footer()
 

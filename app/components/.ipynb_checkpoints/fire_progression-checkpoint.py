@@ -73,7 +73,9 @@ class FireProgression:
                 len=0.5,
                 yanchor="middle",
                 y=0.5
-            )
+            ),
+            width=1000,  # Set fixed width for the figure
+            height=600   # Ensure height is set in layout as well
         )
 
         # Update session state with current map view

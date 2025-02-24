@@ -118,7 +118,7 @@ class VegBurn:
         with st.spinner("Loading map... This may take a few moments..."):
             m = self.create_map()
             if m is not None:
-                folium_static(m, width=800, height=600)
+                folium_static(m, width=1000, height=600)
 
 def main():
     st.set_page_config(layout="wide")

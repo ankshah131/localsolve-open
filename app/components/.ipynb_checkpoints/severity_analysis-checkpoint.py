@@ -124,7 +124,7 @@ class SeverityAnalysis:
             st.subheader("Interactive Fire Map")
             # Create the map and display it using st_folium
             m = self.create_map()
-            st_folium(m, width=800, height=600)
+            st_folium(m, width=1000, height=600)
             
         with col2:
             st.subheader("Map Controls")

@@ -39,15 +39,27 @@ class VegetationAnalysis:
         trees_data = self.data_loader.trees_withburn
         severity_counts = trees_data.groupby(['sum', 'category'])['species'].count().reset_index()
         severity_counts = severity_counts.sort_values('species', ascending=False)
+        print(trees_data[['sum', 'category']])
         
         severity_colors = {
-            1: '#008000',  # green
-            2: '#90EE90',  # lightgreen
-            3: '#FFFF00',  # yellow
-            4: '#FFA500',  # orange
-            5: '#FF0000',  # red
-            6: '#8B4513',  # brown
-            7: '#000000'   # black
+            1: '#7a8737',  # green
+            2: '#acbe4d',  # lightgreen
+            3: '#0ae042',  # yellow
+            4: '#fff70b',  # orange
+            5: '#ffaf38',  # red
+            6: '#ff641b',  # brown
+            7: '#a41fd6'   # black
+        }
+
+        
+        mode_categories = {
+            7: "High Severity",
+            6: "Moderate-high Severity",
+            5: "Moderate-low Severity",
+            4: "Low Severity",
+            3: "Unburned",
+            2: "Enhanced Regrowth, Low",
+            1: "Enhanced Regrowth, High"
         }
         
         fig = go.Figure()
@@ -56,7 +68,7 @@ class VegetationAnalysis:
             fig.add_trace(go.Bar(
                 x=severity_counts[mask]['category'],
                 y=severity_counts[mask]['species'],
-                name=f'Severity {severity}',
+                name=mode_categories[severity],  # Using the descriptive category names
                 marker_color=severity_colors[severity]
             ))
             
