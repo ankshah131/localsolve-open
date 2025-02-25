@@ -5,6 +5,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+        exclude: "^mkdocs.*"
       - id: check-ast
       - id: check-json
         types: [text]
@@ -18,11 +19,20 @@ repos:
         types_or: [python, jupyter]
       - id: ruff-format
         types_or: [python, jupyter]
-  - repo: https://github.com/rbubley/mirrors-prettier # Update mirror as official mirror is deprecated
-    rev: v3.4.2
-    hooks:
-      - id: prettier
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
     hooks:
       - id: nbstripout
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.4.2
+    hooks:
+      - id: prettier
+        exclude: "^docs/.*.md"
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.19
+    hooks:
+      - id: mdformat
+        exclude: "^(?!docs/).*" # Only format files in the docs directory
+        additional_dependencies:
+          - mdformat-mkdocs
+          - mdformat_frontmatter
