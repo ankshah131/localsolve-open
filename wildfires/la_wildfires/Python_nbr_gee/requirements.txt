@@ -1,0 +1,6 @@
+earthengine-api
+ipykernel
+ca-certificates
+openssl
+geemap
+certifi
