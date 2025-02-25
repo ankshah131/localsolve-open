@@ -24,7 +24,7 @@ nav:
   - index.md
   - Get Involved:
       - Home: get-involved/index.md
-      # - Contributing: get-involved/contributing.md # TODO: Should be an orphaned page that is only refered to when discussing starting or contributing to projects?
+      - Contributing: get-involved/contributing.md # TODO: Should be an orphaned page that is only refered to when discussing starting or contributing to projects?
       - Resources: get-involved/resources.md
   - about.md
 
