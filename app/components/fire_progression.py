@@ -23,11 +23,6 @@ import io
 #             return df
 #     return pd.DataFrame()
 
-# class FireDataLoader:
-#     def __init__(self):
-#         self.df = fetch_fire_data()  # Load cached data
-#         self.infrastructure = None
-
 # Fetch fire data
 @st.cache_data
 def fetch_fire_data():
@@ -45,6 +40,11 @@ def fetch_fire_data():
             )
             return df
     return pd.DataFrame()
+
+class FireDataLoader:
+    def __init__(self):
+        self.df = fetch_fire_data()  # Load cached data
+        self.infrastructure = None
 
 # # Fire Progression Class
 # class FireProgression:
