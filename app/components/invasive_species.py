@@ -145,6 +145,29 @@ class InvasivesMap:
                 "and affecting soil composition. Monitoring and managing invasive species is crucial for ecological restoration."
             )
 
+        st.subheader("Most Common Invasive Species")
+        st.write("Understanding the fire hazards associated with various plant species, especially when dry, is crucial for effective land management and wildfire prevention.")
+
+        species_info = [
+            ("Spanish Broom (*Spartium junceum*)", "Highly flammable when dry, contributing significantly to wildfire risks. Its dense growth creates continuous fuel beds, facilitating rapid fire spread.", "https://upload.wikimedia.org/wikipedia/commons/9/97/Spartium_junceum_%28habitus%29.jpg"),
+            ("Saltcedar (*Tamarix ramosissima*)", "Accumulates salt in its foliage, which can inhibit native plant growth. Its fine, dry leaves and branches are highly combustible, increasing fire intensity in invaded areas.", "https://www.invasivespeciesinfo.gov/sites/default/files/styles/extra_large/public/media/image/saltcedar-1624020.jpg?itok=V8IocgSj"),
+            ("Giant Reed (*Arundo donax*)", "Highly flammable throughout the year. During dry months, it increases the probability, intensity, and spread of wildfires in riparian environments.", "https://upload.wikimedia.org/wikipedia/commons/7/78/Arundo_donax_001.JPG"),
+            ("Tree Tobacco (*Nicotiana glauca*)", "A shrubby species that can contribute to fuel loads, especially when dry, potentially aiding fire spread.", "https://upload.wikimedia.org/wikipedia/commons/9/94/Nicotiana_glauca_%288694803666%29.jpg"),
+            ("Maltese Star-Thistle (*Centaurea melitensis*)", "Forms dense stands that, when dry, provide fine fuels that ignite easily, increasing fire frequency and intensity.", "https://cdn2.picryl.com/photo/2014/05/02/centaurea-melitensis-flickr-aspidoscelis-50b10a-1024.jpg"),
+            ("Cheatgrass (*Bromus tectorum*)", "Dries out early in the summer, leaving vast areas of highly flammable fuel. Increases wildfire frequency and intensity.", "https://upload.wikimedia.org/wikipedia/commons/b/b8/Cheatgrass%2C_Bromus_tectorum_%2815678709413%29.jpg"),
+            ("Cogongrass (*Imperata cylindrica*)", "Highly flammable and creates dense vegetation layers that fuel wildfires, increasing fire frequency and intensity.", "https://www.invasivespeciesinfo.gov/sites/default/files/styles/extra_large/public/media/image/cogongrass-5533096.jpg?itok=g7kn4kyw"),
+            ("Himalayan Blackberry (*Rubus armeniacus*)", "Highly flammable due to litter and dead canes, acting as a ladder fuel that spreads fires into tree canopies.", "https://www.fs.usda.gov/database/feis/plants/shrub/rubspp/flower.jpg"),
+            ("Lantana (*Lantana camara*)", "Can change fire patterns by altering the fuel load and increasing the risk of fires spreading to the canopy.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDvOA3aAcmKcyWqTEDGq2Qo9bjT2_S68Tg4w&s")
+        ]
+
+        for name, description, img_url in species_info:
+            col1, col2 = st.columns([1, 3])
+            with col1:
+                st.image(img_url, width=150)
+            with col2:
+                st.markdown(f"### {name}")
+                st.write(description)
+
 
 def main():
     st.set_page_config(layout="wide")
