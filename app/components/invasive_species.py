@@ -136,7 +136,7 @@ class InvasivesMap:
             return None
 
     def display(self):
-        st.title("Invasive Species Map for te Eaton Fire")
+        st.title("Invasive Species Map for the Eaton Fire")
         
         col1, col2 = st.columns([2, 1])  # Creating two columns, with col1 taking 2/3 space
     
