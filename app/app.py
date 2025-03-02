@@ -20,7 +20,7 @@ class WildfireAnalysisDashboard:
         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
         self.fire_progression = FireProgression(self.fire_data_loader)
         self.veg_burn = VegBurn()
-        #self.invasive_species = InvasivesMap(self.data_loader)
+        self.invasive_species = InvasivesMap()
 
     def display_header(self):
         st.title("LA Wildfire Impact App")
