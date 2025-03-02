@@ -134,7 +134,6 @@ class FireProgression:
                 #### Rapid Fire Spread Due to Santa Ana Winds (Jan 7-10)
                 The **Santa Ana winds**—strong, dry winds that sweep across Southern California—**significantly accelerated fire spread from January 7-10**. These winds, reaching speeds of **55-70+ mph**, along with dried out vegetation carried embers long distances, fueling the rapid expansion of fires. 
         
-                This dataset is valuable for tracking wildfire spread, identifying high-intensity burn areas, and supporting disaster response.
                 """)
 
         else:
