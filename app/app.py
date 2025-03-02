@@ -68,6 +68,11 @@ class WildfireAnalysisDashboard:
                 <strong>Kabir Ahamad (CAN)</strong>
                 <strong>Vanesa Martin (USA)</strong>.
             </p>
+
+            <p style='font-size: 14px; color: #444; margin-top: 10px;'>
+                Contact <strong>PlanetSapling</strong> to request the vegetation and urban tree species data files at 
+                <strong>contact(at)planetsapling.com</strong>.
+            </p>            
         </div>
         """, unsafe_allow_html=True)
 
