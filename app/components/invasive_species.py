@@ -1,5 +1,6 @@
 import streamlit as st
 import folium
+import pandas as pd
 import requests
 import geopandas as gpd
 from io import BytesIO
@@ -40,24 +41,25 @@ class InvasivesMap:
             [34.20804709919758, -118.33340929379713]
         ]
 
-    def load_geojson_data(self, url):
-        """Generic function to load GeoJSON data from a URL."""
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            
-            gdf = gpd.read_file(BytesIO(response.content))
-            gdf = gdf.to_crs(epsg=4326)
-    
-            # Convert timestamp columns to string (Fix for JSON serialization error)
-            for col in gdf.columns:
-                if gdf[col].dtype == "datetime64[ns]":
-                    gdf[col] = gdf[col].astype(str)
-    
-            return gdf
-        except Exception as e:
-            st.error(f"Error loading data from {url}: {str(e)}")
-            return None
+def load_geojson_data(self, url):
+    """Generic function to load GeoJSON data from a URL and handle datetime issues."""
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        
+        gdf = gpd.read_file(BytesIO(response.content))
+        gdf = gdf.to_crs(epsg=4326)
+
+        # Convert ALL datetime columns to string to avoid JSON serialization errors
+        for col in gdf.columns:
+            if pd.api.types.is_datetime64_any_dtype(gdf[col]):
+                gdf[col] = gdf[col].astype(str)  # Convert timestamp to string
+
+        return gdf
+    except Exception as e:
+        st.error(f"Error loading data from {url}: {str(e)}")
+        return None
+
 
     def create_colormap(self):
         return LinearColormap(
