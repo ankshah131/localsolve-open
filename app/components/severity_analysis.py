@@ -52,7 +52,7 @@ class SeverityAnalysis:
             attr="Sentinel-2 Burn Severity",
             name="Burn Severity",
             overlay=True,
-            opacity=0.4
+            opacity=0.5
         ).add_to(m)
         
         
