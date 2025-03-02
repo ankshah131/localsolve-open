@@ -68,10 +68,10 @@ class VegBurn:
         try:
             m = folium.Map(
                 location=[34.07, -118.58],
-                zoom_start=12,
+                zoom_start=14,
                 tiles="cartodbpositron",
                 min_zoom=6,
-                max_zoom=14,
+                max_zoom=16,
                 max_bounds=True
             )
             
