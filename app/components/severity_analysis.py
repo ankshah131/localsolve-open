@@ -51,7 +51,8 @@ class SeverityAnalysis:
             tiles=self.TILE_BURN_SEVERITY,
             attr="Sentinel-2 Burn Severity",
             name="Burn Severity",
-            overlay=True
+            overlay=True,
+            opacity=0.4
         ).add_to(m)
         
         
