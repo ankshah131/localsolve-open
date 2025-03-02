@@ -174,22 +174,6 @@ class SeverityAnalysis:
             # Add the legend below the map controls
             self.create_legend()
 
-        # Burn Severity Explanation BELOW THE MAP
-        st.subheader("Understanding Burn Severity")
-        st.markdown("""
-        Burn severity represents the impact of wildfires on vegetation and soil. The different severity levels are:
-        
-        - **High Severity**: Almost all vegetation is burned, with significant soil damage.
-        - **Moderate-high Severity**: Substantial vegetation loss but some plants may recover.
-        - **Moderate-low Severity**: Partial damage to vegetation, but soil remains stable.
-        - **Low Severity**: Minimal damage to vegetation and soil.
-        - **Unburned**: The area was not affected by the fire.
-        - **Enhanced Regrowth**: Some areas see rapid vegetation regrowth post-fire.
-
-        This map allows users to compare **pre-burn and post-burn satellite imagery**, view **burn severity classifications**, 
-        and examine **fire perimeters**. Use the **layer selector** (top right) to toggle between different layers.
-        """)
-
 
 def main():
     st.set_page_config(layout="wide")
