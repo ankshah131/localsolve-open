@@ -92,35 +92,7 @@ class FireProgression:
             })
             
         return fig
-
-    # def display(self):
-    #     st.title("Los Angeles Wildfire Progression - January 2025")
-    
-    #     df = self.data_loader.df
-    
-    #     if not df.empty:
-    #         col1, col2 = st.columns([3, 1.2], gap="large")
-
-    #         with col1:
-    #             st.subheader("Fire Progression Visualization")
-    #             date_min = df['acq_date'].min().date()
-    #             date_max = df['acq_date'].max().date()
-
-    #             selected_date = st.slider(
-    #                 "Analysis Date",
-    #                 min_value=date_min,
-    #                 max_value=date_max,
-    #                 value=date_min,
-    #                 format="MM/DD/YYYY"
-    #             )
-
-    #             df_filtered = df[df['acq_date'].dt.date <= selected_date]
-
-    #             fig = self.create_map(df_filtered)
-    #             st.plotly_chart(fig, use_container_width=True)
-
-    #     else:
-    #         st.warning("No data available to display.")
+        
 
     def display(self):
         st.title("Los Angeles Wildfire Progression - January 2025")
@@ -157,7 +129,12 @@ class FireProgression:
                 - The **map colors** indicate **thermal intensity**—red/orange for hotter fires, yellow for cooler hotspots.
                 - **Larger clusters** of fire hotspots suggest **rapid fire spread**.
 
-                This tool provides valuable insight into wildfire behavior, helping researchers and responders **monitor and predict fire movement**.
+                This tool provides valuable insight into wildfire behavior, helping researchers and responders *understand how these fires spread across time**.
+
+                #### Rapid Fire Spread Due to Santa Ana Winds (Jan 7-10)
+                The **Santa Ana winds**—strong, dry winds that sweep across Southern California—**significantly accelerated fire spread from January 7-10**. These winds, reaching speeds of **55-70+ mph**, along with dried out vegetation carried embers long distances, fueling the rapid expansion of fires. 
+        
+                This dataset is valuable for tracking wildfire spread, identifying high-intensity burn areas, and supporting disaster response.
                 """)
 
         else:
