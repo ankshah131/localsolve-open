@@ -40,7 +40,7 @@ class InvasivesMap:
             [34.20804709919758, -118.33340929379713]
         ]
 
-    def load_geojson_data(self, url, mode_field=None):
+    def load_geojson_data(self, url):
         """Generic function to load GeoJSON data from a URL."""
         try:
             response = requests.get(url)
@@ -48,11 +48,12 @@ class InvasivesMap:
             
             gdf = gpd.read_file(BytesIO(response.content))
             gdf = gdf.to_crs(epsg=4326)
-            
-            # if mode_field:
-            #     gdf["mode"] = gdf[mode_field].round().astype(int)
-            #     gdf["burn_severity_category"] = gdf["mode"].map(self.mode_categories)
-            
+    
+            # Convert timestamp columns to string (Fix for JSON serialization error)
+            for col in gdf.columns:
+                if gdf[col].dtype == "datetime64[ns]":
+                    gdf[col] = gdf[col].astype(str)
+    
             return gdf
         except Exception as e:
             st.error(f"Error loading data from {url}: {str(e)}")
