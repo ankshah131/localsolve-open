@@ -139,8 +139,8 @@ class VegBurn:
                 "pre-fire and post-fire conditions. The dNBR is derived from the near-infrared "
                 "(NIR) and shortwave infrared (SWIR) bands of Sentinel-2, where higher values "
                 "indicate severe burns and lower values represent healthy vegetation or regrowth. "
-                "To summarize burn impact at a landscape scale, the National Park Service uses "
-                "vegetation polygons and calculates the mode (most common) burn severity category "
+                "To summarize burn impact at a landscape scale, we used the National Park Service VMI "
+                "vegetation polygons and calculated the mode (most common) burn severity category "
                 "within each polygon. This helps in understanding the dominant fire effects on different "
                 "vegetation types."
             )
