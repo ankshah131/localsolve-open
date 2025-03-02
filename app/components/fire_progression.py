@@ -51,7 +51,7 @@ class FireProgression:
             color="brightness",
             hover_data={
                 "acq_datetime": "|%Y-%m-%d %H:%M",
-                "confidence": ":.0f",
+                #"confidence": ":.0f",
                 "latitude": ":.2f",
                 "longitude": ":.2f",
                 "brightness": ":.1f"
