@@ -114,32 +114,6 @@ class SeverityAnalysis:
                 unsafe_allow_html=True
             )
 
-    # def display(self):
-    #     st.title("LA Fires Burn Severity Analysis")
-        
-    #     # Create columns for the layout
-    #     col1, col2 = st.columns([3, 1])
-        
-    #     with col1:
-    #         st.subheader("Interactive Fire Map")
-    #         # Create the map and display it using st_folium
-    #         m = self.create_map()
-    #         st_folium(m, width=1000, height=600)
-            
-    #     with col2:
-    #         st.subheader("Map Controls")
-    #         st.write("""
-    #         Use the layer control in the top right of the map to toggle between:
-    #         - Pre-Burn Imagery
-    #         - Post-Burn Imagery
-    #         - Burn Severity
-    #         - Fire Perimeters
-    #         """)
-            
-    #         st.info("Click on fire perimeters to view details about each fire mission.")
-            
-    #         # Add the legend below the map controls
-    #         self.create_legend()
 
     def display(self):
         st.title("LA Fires Burn Severity Analysis")
