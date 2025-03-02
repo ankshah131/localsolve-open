@@ -6,6 +6,29 @@ import requests
 import io
 
 # Caching the data fetch function for efficiency
+# @st.cache_data
+# def fetch_fire_data():
+#     CSV_URL = "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/filtered_la_january_2025_fire_hotspots_combined.csv"
+#     response = requests.get(CSV_URL)
+    
+#     if response.status_code == 200:
+#         csv_data = response.content
+#         df = pd.read_csv(io.StringIO(csv_data.decode("utf-8")))
+#         if not df.empty:
+#             df['acq_date'] = pd.to_datetime(df['acq_date'])
+#             df['acq_datetime'] = df['acq_date'] + pd.to_timedelta(
+#                 df['acq_time'].astype(str).str.zfill(4).str[:2] + ':' + 
+#                 df['acq_time'].astype(str).str.zfill(4).str[2:] + ':00'
+#             )
+#             return df
+#     return pd.DataFrame()
+
+# class FireDataLoader:
+#     def __init__(self):
+#         self.df = fetch_fire_data()  # Load cached data
+#         self.infrastructure = None
+
+# Fetch fire data
 @st.cache_data
 def fetch_fire_data():
     CSV_URL = "https://storage.googleapis.com/localsolve_assets/la_wildfires_jan_2025/filtered_la_january_2025_fire_hotspots_combined.csv"
@@ -22,11 +45,6 @@ def fetch_fire_data():
             )
             return df
     return pd.DataFrame()
-
-class FireDataLoader:
-    def __init__(self):
-        self.df = fetch_fire_data()  # Load cached data
-        self.infrastructure = None
 
 # # Fire Progression Class
 # class FireProgression:
