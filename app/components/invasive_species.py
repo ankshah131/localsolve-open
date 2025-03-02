@@ -18,7 +18,7 @@ BURN_SEVERITY_CLASSES = {
     "NA": "#ffffff"
 }
 
-class BurnSeverityMap:
+class InvasivesMap:
     def __init__(self):
         self.TILE_BURN_SEVERITY = "https://storage.googleapis.com/localsolve_assets/dNBR_Classified_Colored_Tiles_High_Zoom/{z}/{x}/{y}.png"
         self.VEGETATION_GEOJSON_URL = "https://storage.googleapis.com/localsolve_assets/Vegetationwithburn_mode.geojson"
@@ -166,7 +166,7 @@ class BurnSeverityMap:
 
 def main():
     st.set_page_config(layout="wide")
-    analysis = BurnSeverityMap()
+    analysis = InvasivesMap()
     analysis.display()
 
 if __name__ == "__main__":
