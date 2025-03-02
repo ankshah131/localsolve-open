@@ -74,7 +74,7 @@ class InvasivesMap:
     def create_map(self):
         try:
             m = folium.Map(
-                location=[34.21748, -118.1339],
+                location=[34.21464, -118.0666],
                 zoom_start=14,
                 tiles="cartodbpositron",
                 min_zoom=6,
@@ -91,27 +91,6 @@ class InvasivesMap:
                 overlay=True
             ).add_to(m)
             
-            # Load and add vegetation burn severity layer
-            # gdf_vegetation = self.load_geojson_data(self.VEGETATION_GEOJSON_URL, mode_field="mode")
-            # if gdf_vegetation is not None:
-            #     colormap = self.create_colormap()
-                
-            #     folium.GeoJson(
-            #         gdf_vegetation,
-            #         name="Vegetation Burn Severity",
-            #         style_function=lambda feature: {
-            #             "fillColor": colormap(feature["properties"].get("mode", 1)),
-            #             "color": "black",
-            #             "weight": 0.7,
-            #             "fillOpacity": 0.6
-            #         },
-            #         tooltip=folium.GeoJsonTooltip(
-            #             fields=["Class_Cnam", "Class_Snam", "burn_severity_category"],
-            #             aliases=["Common Name", "Scientific Name", "Burn Severity Category"]
-            #         )
-            #     ).add_to(m)
-                
-            #     m.add_child(colormap)
 
             # Load and add invasive species layer
             gdf_invasives = self.load_geojson_data(self.INVASIVES_GEOJSON_URL)
@@ -127,7 +106,7 @@ class InvasivesMap:
                     },
                     tooltip=folium.GeoJsonTooltip(
                         fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT"],
-                        aliases=["Common Name", "Scientific Name", "Date of Last Update"]
+                        aliases=["Common Name", "Scientific Name", "Date Last Updated"]
                     )
                 ).add_to(m)
 
