@@ -62,7 +62,7 @@ class FireProgression:
             zoom=st.session_state.map_center['zoom'],
             center={"lat": st.session_state.map_center['lat'], "lon": st.session_state.map_center['lon']},
             color_continuous_scale=px.colors.sequential.YlOrRd,
-            labels={'brightness': 'Thermal Radiation (K)'}
+            labels={'brightness': 'Brightness Temperature (K)'}
         )
 
         fig.update_traces(
@@ -73,7 +73,7 @@ class FireProgression:
             margin=dict(l=0, r=0, t=30, b=0),
             mapbox=dict(bearing=0, pitch=0),
             coloraxis_colorbar=dict(
-                title="Brightness (K)",
+                title="Brightness Temperature (K)",
                 thickness=20,
                 len=0.5,
                 yanchor="middle",
