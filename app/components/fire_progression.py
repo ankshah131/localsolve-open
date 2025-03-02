@@ -40,7 +40,7 @@ class FireProgression:
         
         if 'map_center' not in st.session_state:
             # Adjusted initial zoom for better default view
-            st.session_state.map_center = {'lat': 34.18612130853171, 'lon': -118.337172042249, 'zoom': 9}
+            st.session_state.map_center = {'lat': 34.18612130853171, 'lon': -118.337172042249, 'zoom': 10}
 
     def create_map(self, df_filtered):
         # Use a reliable map style that doesn't require tokens
