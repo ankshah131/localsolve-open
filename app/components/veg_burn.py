@@ -112,13 +112,39 @@ class VegBurn:
             st.error(f"Error creating map: {str(e)}")
             return None
 
+    # def display(self):
+    #     st.title("Vegetation Burn Severity")
+        
+    #     with st.spinner("Loading map... This may take a few moments..."):
+    #         m = self.create_map()
+    #         if m is not None:
+    #             folium_static(m, width=1000, height=600)
+
     def display(self):
         st.title("Vegetation Burn Severity")
         
-        with st.spinner("Loading map... This may take a few moments..."):
-            m = self.create_map()
-            if m is not None:
-                folium_static(m, width=1000, height=600)
+        col1, col2 = st.columns([2, 1])  # Creating two columns, with col1 taking 2/3 space
+    
+        with col1:
+            with st.spinner("Loading map... This may take a few moments..."):
+                m = self.create_map()
+                if m is not None:
+                    folium_static(m, width=1000, height=600)
+    
+        with col2:
+            st.subheader("How Burn Severity is Measured")
+            st.write(
+                "Burn severity is assessed using Sentinel-2 satellite imagery by "
+                "calculating the differenced Normalized Burn Ratio (dNBR), which compares "
+                "pre-fire and post-fire conditions. The dNBR is derived from the near-infrared "
+                "(NIR) and shortwave infrared (SWIR) bands of Sentinel-2, where higher values "
+                "indicate severe burns and lower values represent healthy vegetation or regrowth. "
+                "To summarize burn impact at a landscape scale, the National Park Service uses "
+                "vegetation polygons and calculates the mode (most common) burn severity category "
+                "within each polygon. This helps in understanding the dominant fire effects on different "
+                "vegetation types."
+            )
+
 
 def main():
     st.set_page_config(layout="wide")
