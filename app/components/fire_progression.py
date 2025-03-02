@@ -93,6 +93,35 @@ class FireProgression:
             
         return fig
 
+    # def display(self):
+    #     st.title("Los Angeles Wildfire Progression - January 2025")
+    
+    #     df = self.data_loader.df
+    
+    #     if not df.empty:
+    #         col1, col2 = st.columns([3, 1.2], gap="large")
+
+    #         with col1:
+    #             st.subheader("Fire Progression Visualization")
+    #             date_min = df['acq_date'].min().date()
+    #             date_max = df['acq_date'].max().date()
+
+    #             selected_date = st.slider(
+    #                 "Analysis Date",
+    #                 min_value=date_min,
+    #                 max_value=date_max,
+    #                 value=date_min,
+    #                 format="MM/DD/YYYY"
+    #             )
+
+    #             df_filtered = df[df['acq_date'].dt.date <= selected_date]
+
+    #             fig = self.create_map(df_filtered)
+    #             st.plotly_chart(fig, use_container_width=True)
+
+    #     else:
+    #         st.warning("No data available to display.")
+
     def display(self):
         st.title("Los Angeles Wildfire Progression - January 2025")
     
@@ -121,6 +150,27 @@ class FireProgression:
 
         else:
             st.warning("No data available to display.")
+
+        # Fire Data Explanation BELOW THE MAP
+        st.subheader("Understanding VIIRS Fire Hotspots & Brightness Temperature")
+        st.markdown("""
+        The **Visible Infrared Imaging Radiometer Suite (VIIRS)** on the Suomi NPP satellite detects fire hotspots using 
+        thermal infrared sensing. The data is sub-daily with a spatial resolution of 375 meters. The key indicators include:
+
+        - **Fire Hotspots:** Each detected point represents an area where active burning is occurring.
+        - **Brightness Temperature (K):** Measures the infrared energy emitted by the fire. Higher values indicate more 
+          intense heat and combustion.
+        - **Confidence Levels:** Indicates the likelihood that the detected heat source is a fire.
+
+        ### How Fire Progression is Tracked
+        This interactive visualization shows how fires **cumulatively expand over time**:
+        - Use the **date slider** above to view fire hotspots on specific dates.
+        - The **map colors** indicate **thermal intensity**—red/orange for hotter fires, yellow for cooler hotspots.
+        - **Larger clusters** of fire hotspots suggest **rapid fire spread**.
+
+        This tool provides valuable insight into wildfire behavior, helping researchers and responders monitor and predict 
+        fire movement.
+        """)
 
 # Run Streamlit App
 if __name__ == "__main__":
