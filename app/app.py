@@ -53,6 +53,29 @@ class WildfireAnalysisDashboard:
                      "5", 
                      "Expanding", delta_color="inverse")
 
+    # def display_footer(self):
+    #     st.markdown("""
+    #     <div style='text-align: center; padding: 1rem; background-color: #f0f4f7; border-radius: 0.5rem; margin-top: 1rem;'>
+    #         <p style='font-size: 14px; color: #444;'>
+    #             This app was created as part of the PlanetSapling LocalSolve Initiative by a group of Data Scientists: 
+    #             <br>
+    #             <strong>Ankur Shah (USA)</strong>, 
+    #             <strong>Magdalena Kortas (AU)</strong>,
+    #             <strong>Keenan Eves (USA)</strong>, 
+    #             <strong>Palak Agarwal (USA)</strong>, 
+    #             <strong>Manuel Alafaa (NGA)</strong>,
+    #             <strong>Aurelien Callens (FRA)</strong>,
+    #             <strong>Kabir Ahamad (CAN)</strong>
+    #             <strong>Vanesa Martin (USA)</strong>.
+    #         </p>
+
+    #         <p style='font-size: 14px; color: #444; margin-top: 10px;'>
+    #             Contact <strong>PlanetSapling</strong> to request the vegetation and urban tree species data files at 
+    #             <strong>contact(at)planetsapling.com</strong>.
+    #         </p>            
+    #     </div>
+    #     """, unsafe_allow_html=True)
+
     def display_footer(self):
         st.markdown("""
         <div style='text-align: center; padding: 1rem; background-color: #f0f4f7; border-radius: 0.5rem; margin-top: 1rem;'>
@@ -65,14 +88,13 @@ class WildfireAnalysisDashboard:
                 <strong>Palak Agarwal (USA)</strong>, 
                 <strong>Manuel Alafaa (NGA)</strong>,
                 <strong>Aurelien Callens (FRA)</strong>,
-                <strong>Kabir Ahamad (CAN)</strong>
+                <strong>Kabir Ahamad (CAN)</strong>,
                 <strong>Vanesa Martin (USA)</strong>.
             </p>
-
             <p style='font-size: 14px; color: #444; margin-top: 10px;'>
                 Contact <strong>PlanetSapling</strong> to request the vegetation and urban tree species data files at 
                 <strong>contact(at)planetsapling.com</strong>.
-            </p>            
+            </p>
         </div>
         """, unsafe_allow_html=True)
 
