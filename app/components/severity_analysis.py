@@ -114,32 +114,82 @@ class SeverityAnalysis:
                 unsafe_allow_html=True
             )
 
+    # def display(self):
+    #     st.title("LA Fires Burn Severity Analysis")
+        
+    #     # Create columns for the layout
+    #     col1, col2 = st.columns([3, 1])
+        
+    #     with col1:
+    #         st.subheader("Interactive Fire Map")
+    #         # Create the map and display it using st_folium
+    #         m = self.create_map()
+    #         st_folium(m, width=1000, height=600)
+            
+    #     with col2:
+    #         st.subheader("Map Controls")
+    #         st.write("""
+    #         Use the layer control in the top right of the map to toggle between:
+    #         - Pre-Burn Imagery
+    #         - Post-Burn Imagery
+    #         - Burn Severity
+    #         - Fire Perimeters
+    #         """)
+            
+    #         st.info("Click on fire perimeters to view details about each fire mission.")
+            
+    #         # Add the legend below the map controls
+    #         self.create_legend()
+
     def display(self):
         st.title("LA Fires Burn Severity Analysis")
-        
+
         # Create columns for the layout
         col1, col2 = st.columns([3, 1])
         
         with col1:
             st.subheader("Interactive Fire Map")
-            # Create the map and display it using st_folium
             m = self.create_map()
-            st_folium(m, width=1000, height=600)
+            map_data = st_folium(m, width=1000, height=600)
+
+            # Show clicked coordinates
+            if map_data and map_data.get("last_clicked"):
+                lat, lon = map_data["last_clicked"]["lat"], map_data["last_clicked"]["lng"]
+                st.info(f"Clicked Coordinates: Latitude {lat}, Longitude {lon}")
             
         with col2:
-            st.subheader("Map Controls")
+            st.subheader("How to Use the Map")
             st.write("""
-            Use the layer control in the top right of the map to toggle between:
-            - Pre-Burn Imagery
-            - Post-Burn Imagery
-            - Burn Severity
-            - Fire Perimeters
+            - Click on the **layer control (top right of the map)** to switch between:
+              - Pre-Burn Imagery
+              - Post-Burn Imagery
+              - Burn Severity
+              - Fire Perimeters
+            - **Hover over fire perimeters** to see fire details.
+            - **Click anywhere on the map** to get the latitude and longitude.
             """)
-            
+
             st.info("Click on fire perimeters to view details about each fire mission.")
-            
+
             # Add the legend below the map controls
             self.create_legend()
+
+        # Burn Severity Explanation BELOW THE MAP
+        st.subheader("Understanding Burn Severity")
+        st.markdown("""
+        Burn severity represents the impact of wildfires on vegetation and soil. The different severity levels are:
+        
+        - **High Severity**: Almost all vegetation is burned, with significant soil damage.
+        - **Moderate-high Severity**: Substantial vegetation loss but some plants may recover.
+        - **Moderate-low Severity**: Partial damage to vegetation, but soil remains stable.
+        - **Low Severity**: Minimal damage to vegetation and soil.
+        - **Unburned**: The area was not affected by the fire.
+        - **Enhanced Regrowth**: Some areas see rapid vegetation regrowth post-fire.
+
+        This map allows users to compare **pre-burn and post-burn satellite imagery**, view **burn severity classifications**, 
+        and examine **fire perimeters**. Use the **layer selector** (top right) to toggle between different layers.
+        """)
+
 
 def main():
     st.set_page_config(layout="wide")
