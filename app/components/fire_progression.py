@@ -35,7 +35,7 @@ class FireDataLoader:
         
 #         if 'map_center' not in st.session_state:
 #             # Adjusted initial zoom for better default view
-#             st.session_state.map_center = {'lat': 34.0486, 'lon': -118.5267, 'zoom': 10}
+#             st.session_state.map_center = {'lat': 34.0486, 'lon': -118.5267, 'zoom': 10} 
 
 #     def create_map(self, df_filtered):
 #         # Use a reliable map style that doesn't require tokens
@@ -124,11 +124,20 @@ class FireDataLoader:
 #     app.display()
 
 # Fire Progression Interactive Map
+# class FireProgression:
+#     def __init__(self, df):
+#         self.df = df
+#         if 'map_center' not in st.session_state:
+#             st.session_state.map_center = {'lat': 34.15495567698645, 'lon': -118.24850472263516, 'zoom': 10}
+#         if 'last_selected_date' not in st.session_state:
+#             st.session_state.last_selected_date = self.df['acq_date'].min().date()
+
+# Fire Progression Interactive Map
 class FireProgression:
     def __init__(self, df):
         self.df = df
         if 'map_center' not in st.session_state:
-            st.session_state.map_center = {'lat': 34.0486, 'lon': -118.5267, 'zoom': 10}
+            st.session_state.map_center = {'lat': 34.15495567698645, 'lon': -118.24850472263516, 'zoom': 9}
         if 'last_selected_date' not in st.session_state:
             st.session_state.last_selected_date = self.df['acq_date'].min().date()
 
@@ -144,7 +153,7 @@ class FireProgression:
             zoom=st.session_state.map_center['zoom'],
             center={"lat": st.session_state.map_center['lat'], "lon": st.session_state.map_center['lon']},
             color_continuous_scale=px.colors.sequential.YlOrRd,
-            labels={'brightness': 'Brightness Temperature (K)'}
+            labels={'brightness': 'Thermal Radiation (K)'}
         )
 
         fig.update_traces(marker=dict(size=6), selector=dict(mode='markers'))
@@ -152,7 +161,7 @@ class FireProgression:
             margin=dict(l=0, r=0, t=30, b=0),
             mapbox=dict(bearing=0, pitch=0),
             coloraxis_colorbar=dict(
-                title="Brightness Temp (K)",
+                title="Brightness (K)",
                 thickness=20,
                 len=0.5,
                 yanchor="middle",
