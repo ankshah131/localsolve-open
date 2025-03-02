@@ -29,7 +29,7 @@ class SeverityAnalysis:
     def create_map(self):
         # Create a Folium map centered on Los Angeles
         m = folium.Map(location=[34.18716861471849, -118.32657647829909], 
-                      zoom_start=14, min_zoom=6,max_zoom=14, max_bounds=True,
+                      zoom_start=12, min_zoom=6,max_zoom=14, max_bounds=True,
                       tiles="cartodbpositron")
         
         # Add pre-burn layer
