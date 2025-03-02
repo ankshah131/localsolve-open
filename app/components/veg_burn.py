@@ -67,7 +67,7 @@ class VegBurn:
     def create_map(self):
         try:
             m = folium.Map(
-                location=[34.07, -118.58]
+                location=[34.07, -118.58],
                 zoom_start=12,
                 tiles="cartodbpositron",
                 min_zoom=6,
