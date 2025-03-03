@@ -116,6 +116,9 @@ class InvasivesMap:
             # Load and add invasive species layer
             gdf_invasives = self.load_geojson_data(self.INVASIVES_GEOJSON_URL)
             if gdf_invasives is not None:
+                # Add a new column "Source" with the fixed value "CALVEG"
+                gdf_invasives["Source"] = "CALVEG"
+            
                 folium.GeoJson(
                     gdf_invasives,
                     name="Invasive Species",
@@ -126,8 +129,8 @@ class InvasivesMap:
                         "fillOpacity": 0.6
                     },
                     tooltip=folium.GeoJsonTooltip(
-                        fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT"],  # Existing fields
-                        aliases=["Common Name", "Scientific Name", "Date Last Updated", "Source"],  # Adding manual alias
+                        fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT", "Source"],  # Include "Source"
+                        aliases=["Common Name", "Scientific Name", "Date Last Updated", "Source"],  # Matching aliases
                         localize=True,
                         sticky=False,
                         labels=True
@@ -136,13 +139,11 @@ class InvasivesMap:
                         "weight": 2,
                         "color": "#333333",
                         "fillOpacity": 0.8
-                    },
-                    tooltip_fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT", None],  # Adding extra tooltip field (None for manual addition)
-                    tooltip_aliases=["Common Name", "Scientific Name", "Date Last Updated", "Source"],
-                    tooltip_values=["", "", "", "CALVEG"]  # Setting "Source" manually as "CALVEG"
+                    }
                 ).add_to(m)
             
             folium.LayerControl().add_to(m)
+
             
             return m
         except Exception as e:
