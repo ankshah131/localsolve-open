@@ -146,7 +146,7 @@ class InvasivesMap:
                 "and affecting soil composition. Monitoring and managing invasive species is crucial for ecological restoration."
             )
 
-        st.subheader("Most Common Invasive Species")
+        st.subheader("Most Common Invasive Species in LA County")
         st.write("Understanding the fire hazards associated with various plant species, especially when dry, is crucial for effective land management and wildfire prevention.")
 
         species_info = [
@@ -169,26 +169,6 @@ class InvasivesMap:
                 st.markdown(f"### {name}")
                 st.write(description)
 
-        # def resize_image(image_url, width=150, height=150):
-        #     """Fetch and resize an image to standard dimensions."""
-        #     response = requests.get(image_url)
-        #     if response.status_code == 200:
-        #         image = Image.open(BytesIO(response.content))
-        #         image = image.resize((width, height))
-        #         return image
-        #     return None
-        
-        # for name, description, img_url in species_info:
-        #     col1, col2 = st.columns([1, 3])
-        #     with col1:
-        #         img = resize_image(img_url)
-        #         if img:
-        #             st.image(img)
-        #         else:
-        #             st.write("Image unavailable")
-        #     with col2:
-        #         st.markdown(f"### {name}")
-        #         st.write(description)
 
 def main():
     st.set_page_config(layout="wide")
