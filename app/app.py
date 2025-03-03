@@ -8,19 +8,49 @@ from components.veg_burn import VegBurn
 from components.invasive_species import InvasivesMap 
 
 
+# class WildfireAnalysisDashboard:
+#     def __init__(self):
+#         st.set_page_config(layout="wide", page_title="LA Wildfire Analysis")
+#         self.data_loader = DataLoader()
+#         self.fire_data_loader = FireDataLoader()
+#         setup_styling()
+        
+#         # Initialize components
+#         self.severity_analysis = SeverityAnalysis(self.data_loader)
+#         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
+#         self.fire_progression = FireProgression(self.fire_data_loader)
+#         self.veg_burn = VegBurn()
+#         self.invasive_species = InvasivesMap()
+
 class WildfireAnalysisDashboard:
     def __init__(self):
         st.set_page_config(layout="wide", page_title="LA Wildfire Analysis")
         self.data_loader = DataLoader()
         self.fire_data_loader = FireDataLoader()
         setup_styling()
-        
+
+        # Add Title with Logo
+        self.add_title_with_logo()
+
         # Initialize components
         self.severity_analysis = SeverityAnalysis(self.data_loader)
         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
         self.fire_progression = FireProgression(self.fire_data_loader)
         self.veg_burn = VegBurn()
         self.invasive_species = InvasivesMap()
+
+    def add_title_with_logo(self):
+        logo_url = "https://planetsapling.com/files/dynamicContent/sites/niu3r9/images/en/webpage_15/m5liuyq2/element_665/rwdMode_1/464x434/6-removebg-preview.webp"
+
+        st.markdown(
+            f"""
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0;">
+                <h1 style="margin: 0; flex-grow: 1;">LA Wildfire Analysis</h1>
+                <img src="{logo_url}" style="height: 60px;">
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
     def display_header(self):
         st.title("LA Wildfire Impact App")
