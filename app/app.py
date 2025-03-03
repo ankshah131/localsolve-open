@@ -92,7 +92,7 @@ class WildfireAnalysisDashboard:
                 <strong>Vanesa Martin (USA)</strong>.
             </p>
             <p style='font-size: 14px; color: #444; margin-top: 10px;'>
-                Contact <strong>PlanetSapling</strong> to request the vegetation and urban tree species data files at 
+                Contact <strong>PlanetSapling</strong> to request the free vegetation and urban tree species data files with burn severity at 
                 <strong>contact(at)planetsapling.com</strong>.
             </p>
         </div>
