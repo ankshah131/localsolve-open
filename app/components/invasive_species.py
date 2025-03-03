@@ -76,7 +76,7 @@ class InvasivesMap:
         try:
             m = folium.Map(
                 location=[34.21464, -118.0666],
-                zoom_start=14,
+                zoom_start=15,
                 tiles="cartodbpositron",
                 min_zoom=6,
                 max_zoom=14,
