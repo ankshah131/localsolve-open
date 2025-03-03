@@ -161,34 +161,34 @@ class InvasivesMap:
             ("Lantana (*Lantana camara*)", "Can change fire patterns by altering the fuel load and increasing the risk of fires spreading to the canopy. Its toxic leaves deter herbivores, reducing natural population control. Lantana aggressively invades pastures, forests, and riparian zones, suppressing native vegetation and biodiversity.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDvOA3aAcmKcyWqTEDGq2Qo9bjT2_S68Tg4w&s")
         ]
 
-        # for name, description, img_url in species_info:
-        #     col1, col2 = st.columns([1, 3])
-        #     with col1:
-        #         st.image(img_url, width=150)
-        #     with col2:
-        #         st.markdown(f"### {name}")
-        #         st.write(description)
-
-        def resize_image(image_url, width=150, height=150):
-            """Fetch and resize an image to standard dimensions."""
-            response = requests.get(image_url)
-            if response.status_code == 200:
-                image = Image.open(BytesIO(response.content))
-                image = image.resize((width, height))
-                return image
-            return None
-        
         for name, description, img_url in species_info:
             col1, col2 = st.columns([1, 3])
             with col1:
-                img = resize_image(img_url)
-                if img:
-                    st.image(img)
-                else:
-                    st.write("Image unavailable")
+                st.image(img_url, width=150)
             with col2:
                 st.markdown(f"### {name}")
                 st.write(description)
+
+        # def resize_image(image_url, width=150, height=150):
+        #     """Fetch and resize an image to standard dimensions."""
+        #     response = requests.get(image_url)
+        #     if response.status_code == 200:
+        #         image = Image.open(BytesIO(response.content))
+        #         image = image.resize((width, height))
+        #         return image
+        #     return None
+        
+        # for name, description, img_url in species_info:
+        #     col1, col2 = st.columns([1, 3])
+        #     with col1:
+        #         img = resize_image(img_url)
+        #         if img:
+        #             st.image(img)
+        #         else:
+        #             st.write("Image unavailable")
+        #     with col2:
+        #         st.markdown(f"### {name}")
+        #         st.write(description)
 
 def main():
     st.set_page_config(layout="wide")
