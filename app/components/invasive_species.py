@@ -168,7 +168,7 @@ class InvasivesMap:
         #         st.markdown(f"### {name}")
         #         st.write(description)
 
-        def resize_image(image_url, width=200, height=150):
+        def resize_image(image_url, width=150, height=150):
             """Fetch and resize an image to standard dimensions."""
             response = requests.get(image_url)
             if response.status_code == 200:
