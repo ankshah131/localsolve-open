@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import geopandas as gpd
 from io import BytesIO
+from PIL import Image
 from branca.colormap import LinearColormap
 from streamlit_folium import folium_static
 
