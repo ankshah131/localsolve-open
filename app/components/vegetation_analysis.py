@@ -18,13 +18,13 @@ class VegetationAnalysis:
         
         return go.Figure(data=[
             go.Bar(name='Low', x=burn_data['Class_Cnam'], 
-                  y=burn_data['Area_of_Burn4'], marker_color='#000000'),
+                  y=burn_data['Area_of_Burn4'], marker_color='#FFFF00'),
             go.Bar(name='Moderate-Low', x=burn_data['Class_Cnam'], 
-                  y=burn_data['Area_of_Burn3'], marker_color='#8B4513'),
+                  y=burn_data['Area_of_Burn3'], marker_color='#FFA500'),
             go.Bar(name='Moderate-High', x=burn_data['Class_Cnam'], 
-                  y=burn_data['Area_of_Burn2'], marker_color='#FFA500'),
+                  y=burn_data['Area_of_Burn2'], marker_color='#8B4513'),
             go.Bar(name='High', x=burn_data['Class_Cnam'], 
-                  y=burn_data['Area_of_Burn1'], marker_color='#FFFF00')
+                  y=burn_data['Area_of_Burn1'], marker_color='#000000')
         ]).update_layout(
             barmode='stack',
             xaxis_tickangle=-45,
@@ -104,7 +104,7 @@ class VegetationAnalysis:
         )
 
     def display(self):
-        st.header("Vegetation Burn Analysis")
+        st.header("Vegetation Burn Analysis for Palisades Fire")
         
         st.subheader("Burn Severity by Vegetation Type")
         st.plotly_chart(
