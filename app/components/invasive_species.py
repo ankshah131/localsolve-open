@@ -93,6 +93,26 @@ class InvasivesMap:
             ).add_to(m)
             
 
+            # # Load and add invasive species layer
+            # gdf_invasives = self.load_geojson_data(self.INVASIVES_GEOJSON_URL)
+            # if gdf_invasives is not None:
+            #     folium.GeoJson(
+            #         gdf_invasives,
+            #         name="Invasive Species",
+            #         style_function=lambda feature: {
+            #             "fillColor": "#FF0000",  # Red for invasives
+            #             "color": "#990000",
+            #             "weight": 0.8,
+            #             "fillOpacity": 0.6
+            #         },
+            #         tooltip=folium.GeoJsonTooltip(
+            #             fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT"],
+            #             aliases=["Common Name", "Scientific Name", "Date Last Updated"]
+            #         )
+            #     ).add_to(m)
+
+            # folium.LayerControl().add_to(m)
+
             # Load and add invasive species layer
             gdf_invasives = self.load_geojson_data(self.INVASIVES_GEOJSON_URL)
             if gdf_invasives is not None:
@@ -106,11 +126,22 @@ class InvasivesMap:
                         "fillOpacity": 0.6
                     },
                     tooltip=folium.GeoJsonTooltip(
-                        fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT"],
-                        aliases=["Common Name", "Scientific Name", "Date Last Updated"]
-                    )
+                        fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT"],  # Existing fields
+                        aliases=["Common Name", "Scientific Name", "Date Last Updated", "Source"],  # Adding manual alias
+                        localize=True,
+                        sticky=False,
+                        labels=True
+                    ),
+                    highlight_function=lambda x: {
+                        "weight": 2,
+                        "color": "#333333",
+                        "fillOpacity": 0.8
+                    },
+                    tooltip_fields=["ACCEPTED_C", "ACCEPTED_S", "LAST_UPDAT", None],  # Adding extra tooltip field (None for manual addition)
+                    tooltip_aliases=["Common Name", "Scientific Name", "Date Last Updated", "Source"],
+                    tooltip_values=["", "", "", "CALVEG"]  # Setting "Source" manually as "CALVEG"
                 ).add_to(m)
-
+            
             folium.LayerControl().add_to(m)
             
             return m
