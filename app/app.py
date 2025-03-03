@@ -27,7 +27,7 @@ class WildfireAnalysisDashboard:
         st.markdown("""
         <div style='background-color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #333;'>
         <p style='font-size: 14px; color: #444;'>
-        LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, vegetation damage, and infrastructure conditions, aiding in long term response and recovery planning.
+        The LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for analyzing the vegetation conditions after the fires in January, 2025. This tool is meant for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, vegetation damage, and invasive species, aiding in long term response and recovery planning.
         </p>
         </div>
         """, unsafe_allow_html=True)
@@ -82,14 +82,16 @@ class WildfireAnalysisDashboard:
             <p style='font-size: 14px; color: #444;'>
                 This app was created as part of the PlanetSapling LocalSolve Initiative by a group of Data Scientists: 
                 <br>
-                <strong>Ankur Shah (USA)</strong>, 
-                <strong>Magdalena Kortas (AU)</strong>,
-                <strong>Keenan Eves (USA)</strong>, 
-                <strong>Palak Agarwal (USA)</strong>, 
-                <strong>Manuel Alafaa (NGA)</strong>,
-                <strong>Aurelien Callens (FRA)</strong>,
-                <strong>Kabir Ahamad (CAN)</strong>,
-                <strong>Vanesa Martin (USA)</strong>.
+                <strong>
+                    <a href='https://www.linkedin.com/in/ankur-s-803497126/' target='_blank'>Ankur Shah (USA)</a>,
+                    <a href='https://www.linkedin.com/in/mkortas/' target='_blank'>Magdalena Kortas (AU)</a>,
+                    <a href='https://www.linkedin.com/in/keenan-eves/' target='_blank'>Keenan Eves (USA)</a>,
+                    <a href='https://www.linkedin.com/in/palak-agarwal-025a68191/' target='_blank'>Palak Agarwal (USA)</a>,
+                    <a href='https://www.linkedin.com/in/emmanuelalafaa/' target='_blank'>Emmanuel Alafaa (NGA)</a>,
+                    <a href='https://www.linkedin.com/in/aureliencallens/' target='_blank'>Aurelien Callens (FRA)</a>,
+                    <a href='https://www.linkedin.com/in/kabir-ahamad-74b7621a7/' target='_blank'>Kabir Ahamad (CAN)</a>,
+                    <a href='https://www.linkedin.com/in/vanesa-martin/' target='_blank'>Vanesa Martin Arias (USA)</a>.
+                </strong>
             </p>
             <p style='font-size: 14px; color: #444; margin-top: 10px;'>
                 Contact <strong>PlanetSapling</strong> to request the free vegetation and urban tree species data files with burn severity at 
@@ -97,6 +99,7 @@ class WildfireAnalysisDashboard:
             </p>
         </div>
         """, unsafe_allow_html=True)
+
 
     def run(self):
         self.display_header()
