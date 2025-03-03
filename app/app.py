@@ -8,30 +8,13 @@ from components.veg_burn import VegBurn
 from components.invasive_species import InvasivesMap 
 
 
-# class WildfireAnalysisDashboard:
-#     def __init__(self):
-#         st.set_page_config(layout="wide", page_title="LA Wildfire Analysis")
-#         self.data_loader = DataLoader()
-#         self.fire_data_loader = FireDataLoader()
-#         setup_styling()
-        
-#         # Initialize components
-#         self.severity_analysis = SeverityAnalysis(self.data_loader)
-#         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
-#         self.fire_progression = FireProgression(self.fire_data_loader)
-#         self.veg_burn = VegBurn()
-#         self.invasive_species = InvasivesMap()
-
 class WildfireAnalysisDashboard:
     def __init__(self):
         st.set_page_config(layout="wide", page_title="LA Wildfire Analysis")
         self.data_loader = DataLoader()
         self.fire_data_loader = FireDataLoader()
         setup_styling()
-
-        # Add Title with Logo
-        self.add_title_with_logo()
-
+        
         # Initialize components
         self.severity_analysis = SeverityAnalysis(self.data_loader)
         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
@@ -39,28 +22,33 @@ class WildfireAnalysisDashboard:
         self.veg_burn = VegBurn()
         self.invasive_species = InvasivesMap()
 
-    def add_title_with_logo(self):
-        logo_url = "https://planetsapling.com/files/dynamicContent/sites/niu3r9/images/en/webpage_15/m5liuyq2/element_665/rwdMode_1/464x434/6-removebg-preview.webp"
-
-        st.markdown(
-            f"""
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0;">
-                <h1 style="margin: 0; flex-grow: 1;">LA Wildfire Analysis</h1>
-                <img src="{logo_url}" style="height: 60px;">
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    # def display_header(self):
+    #     st.title("LA Wildfire Impact App")
+    #     st.markdown("""
+    #     <div style='background-color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #333;'>
+    #     <p style='font-size: 14px; color: #444;'>
+    #     The LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for analyzing the vegetation conditions after the fires in January, 2025. This tool is meant for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, vegetation damage, and invasive species, aiding in long term response and recovery planning.
+    #     </p>
+    #     </div>
+    #     """, unsafe_allow_html=True)
 
     def display_header(self):
-        st.title("LA Wildfire Impact App")
-        st.markdown("""
-        <div style='background-color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #333;'>
-        <p style='font-size: 14px; color: #444;'>
-        The LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for analyzing the vegetation conditions after the fires in January, 2025. This tool is meant for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, vegetation damage, and invasive species, aiding in long term response and recovery planning.
-        </p>
-        </div>
-        """, unsafe_allow_html=True)
+            logo_url = "https://planetsapling.com/files/dynamicContent/sites/niu3r9/images/en/webpage_15/m5liuyq2/element_665/rwdMode_1/464x434/6-removebg-preview.webp"
+
+            st.markdown(
+                f"""
+                <div style="display: flex; align-items: center; justify-content: space-between; background-color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #333;">
+                    <h1 style="margin: 0;">LA Wildfire Impact App</h1>
+                    <img src="{logo_url}" style="height: 60px;">
+                </div>
+                <p style="font-size: 14px; color: #444;">
+                    The LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for analyzing the vegetation conditions after the fires in January, 2025. 
+                    This tool is meant for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, 
+                    vegetation damage, and invasive species, aiding in long-term response and recovery planning.
+                </p>
+                """,
+                unsafe_allow_html=True
+            )
 
     def display_metrics(self):
         cols = st.columns(4)
