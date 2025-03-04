@@ -143,9 +143,6 @@ class SeverityAnalysis:
             - **Hover over fire perimeters** to see fire details.
             - **Click anywhere on the map** to get the latitude and longitude.
             """)
-
-            st.info("Click on fire perimeters to view details about each fire mission.")
-
             # Add the legend below the map controls
             self.create_legend()
 

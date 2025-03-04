@@ -112,26 +112,20 @@ class VegBurn:
             st.error(f"Error creating map: {str(e)}")
             return None
 
-    # def display(self):
-    #     st.title("Vegetation Burn Severity")
-        
-    #     with st.spinner("Loading map... This may take a few moments..."):
-    #         m = self.create_map()
-    #         if m is not None:
-    #             folium_static(m, width=1000, height=600)
-
     def display(self):
         st.title("Vegetation Burn Severity")
         
-        col1, col2 = st.columns([2, 1])  # Creating two columns, with col1 taking 2/3 space
-    
-        with col1:
+        # Replace column layout with tabs
+        tabs = st.tabs(["Map", "Information"])
+        
+        with tabs[0]:
             with st.spinner("Loading map... This may take a few moments..."):
                 m = self.create_map()
                 if m is not None:
-                    folium_static(m, width=1000, height=600)
-    
-        with col2:
+                    # Make map responsive by removing fixed width
+                    folium_static(m, width=None, height=600)
+        
+        with tabs[1]:
             st.subheader("How Burn Severity is Measured")
             st.write(
                 "Burn severity is assessed using Sentinel-2 satellite imagery by "
@@ -144,6 +138,13 @@ class VegBurn:
                 "within each polygon. This helps in understanding the dominant fire effects on different "
                 "vegetation types."
             )
+            
+            # Add more information about burn severity classes
+            st.subheader("Burn Severity Classes")
+            for severity, color in BURN_SEVERITY_CLASSES.items():
+                st.markdown(f'<div style="background-color:{color}; padding:10px; margin:5px; border-radius:5px;">{severity}</div>', unsafe_allow_html=True)
+            
+            st.info("The map displays vegetation polygons colored according to their dominant (mode) burn severity category. Click on any polygon to see details.")
 
 
 def main():

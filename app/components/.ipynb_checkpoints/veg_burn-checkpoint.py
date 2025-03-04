@@ -67,8 +67,8 @@ class VegBurn:
     def create_map(self):
         try:
             m = folium.Map(
-                location=[34.0486, -118.5267],
-                zoom_start=16,
+                location=[34.07, -118.58],
+                zoom_start=15,
                 tiles="cartodbpositron",
                 min_zoom=6,
                 max_zoom=14,
@@ -115,10 +115,37 @@ class VegBurn:
     def display(self):
         st.title("Vegetation Burn Severity")
         
-        with st.spinner("Loading map... This may take a few moments..."):
-            m = self.create_map()
-            if m is not None:
-                folium_static(m, width=1000, height=600)
+        # Replace column layout with tabs
+        tabs = st.tabs(["Map", "Information"])
+        
+        with tabs[0]:
+            with st.spinner("Loading map... This may take a few moments..."):
+                m = self.create_map()
+                if m is not None:
+                    # Make map responsive by removing fixed width
+                    folium_static(m, width=None, height=600)
+        
+        with tabs[1]:
+            st.subheader("How Burn Severity is Measured")
+            st.write(
+                "Burn severity is assessed using Sentinel-2 satellite imagery by "
+                "calculating the differenced Normalized Burn Ratio (dNBR), which compares "
+                "pre-fire and post-fire conditions. The dNBR is derived from the near-infrared "
+                "(NIR) and shortwave infrared (SWIR) bands of Sentinel-2, where higher values "
+                "indicate severe burns and lower values represent healthy vegetation or regrowth. "
+                "To summarize burn impact at a landscape scale, we used the National Park Service VMI "
+                "vegetation polygons and calculated the mode (most common) burn severity category "
+                "within each polygon. This helps in understanding the dominant fire effects on different "
+                "vegetation types."
+            )
+            
+            # Add more information about burn severity classes
+            st.subheader("Burn Severity Classes")
+            for severity, color in BURN_SEVERITY_CLASSES.items():
+                st.markdown(f'<div style="background-color:{color}; padding:10px; margin:5px; border-radius:5px;">{severity}</div>', unsafe_allow_html=True)
+            
+            st.info("The map displays vegetation polygons colored according to their dominant (mode) burn severity category. Click on any polygon to see details.")
+
 
 def main():
     st.set_page_config(layout="wide")
