@@ -137,6 +137,10 @@ class VegBurn:
                 "vegetation polygons and calculated the mode (most common) burn severity category "
                 "within each polygon. This helps in understanding the dominant fire effects on different "
                 "vegetation types."
+
+                "Data source - Geospatial data for the Vegetation Mapping Inventory Project of Santa Monica" 
+                "Mountains National Recreation Area https://irma.nps.gov/DataStore/Reference/Profile/2272711"
+
             )
             
             # Add more information about burn severity classes
