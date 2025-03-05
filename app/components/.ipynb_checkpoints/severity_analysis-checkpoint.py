@@ -28,9 +28,9 @@ class SeverityAnalysis:
 
     def create_map(self):
         # Create a Folium map centered on Los Angeles
-        m = folium.Map(location=[34.0486, -118.5267], 
-                      zoom_start=15, min_zoom=6,max_zoom=14, max_bounds=True,
-                      tiles="cartodbpositron")
+        m = folium.Map(location=[34.18716861471849, -118.32657647829909], 
+                      zoom_start=11, min_zoom=6,max_zoom=14, max_bounds=True,
+                      tiles="OpenStreetMap")
         
         # Add pre-burn layer
         folium.TileLayer(
@@ -51,7 +51,8 @@ class SeverityAnalysis:
             tiles=self.TILE_BURN_SEVERITY,
             attr="Sentinel-2 Burn Severity",
             name="Burn Severity",
-            overlay=True
+            overlay=True,
+            opacity=0.5
         ).add_to(m)
         
         
@@ -114,32 +115,37 @@ class SeverityAnalysis:
                 unsafe_allow_html=True
             )
 
+
     def display(self):
         st.title("LA Fires Burn Severity Analysis")
-        
+
         # Create columns for the layout
         col1, col2 = st.columns([3, 1])
         
         with col1:
             st.subheader("Interactive Fire Map")
-            # Create the map and display it using st_folium
             m = self.create_map()
-            st_folium(m, width=1000, height=600)
+            map_data = st_folium(m, width=1000, height=600)
+
+            # Show clicked coordinates
+            if map_data and map_data.get("last_clicked"):
+                lat, lon = map_data["last_clicked"]["lat"], map_data["last_clicked"]["lng"]
+                st.info(f"Clicked Coordinates: Latitude {lat}, Longitude {lon}")
             
         with col2:
-            st.subheader("Map Controls")
+            st.subheader("How to Use the Map")
             st.write("""
-            Use the layer control in the top right of the map to toggle between:
-            - Pre-Burn Imagery
-            - Post-Burn Imagery
-            - Burn Severity
-            - Fire Perimeters
+            - Click on the **layer control (top right of the map)** to switch between:
+              - Pre-Burn Imagery
+              - Post-Burn Imagery
+              - Burn Severity
+              - Fire Perimeters
+            - **Hover over fire perimeters** to see fire details.
+            - **Click anywhere on the map** to get the latitude and longitude.
             """)
-            
-            st.info("Click on fire perimeters to view details about each fire mission.")
-            
             # Add the legend below the map controls
             self.create_legend()
+
 
 def main():
     st.set_page_config(layout="wide")

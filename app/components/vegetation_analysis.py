@@ -30,7 +30,7 @@ class VegetationAnalysis:
             xaxis_tickangle=-45,
             xaxis_title="Species that burned",
             yaxis_title="Area",
-            height=500,
+            height=700,
             showlegend=True,
             legend=dict(title='Burn Severity', yanchor="top", y=0.99, xanchor="right", x=0.99)
         )

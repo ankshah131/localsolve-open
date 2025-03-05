@@ -22,15 +22,6 @@ class WildfireAnalysisDashboard:
         self.veg_burn = VegBurn()
         self.invasive_species = InvasivesMap()
 
-    # def display_header(self):
-    #     st.title("LA Wildfire Impact App")
-    #     st.markdown("""
-    #     <div style='background-color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: #333;'>
-    #     <p style='font-size: 14px; color: #444;'>
-    #     The LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for analyzing the vegetation conditions after the fires in January, 2025. This tool is meant for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, vegetation damage, and invasive species, aiding in long term response and recovery planning.
-    #     </p>
-    #     </div>
-    #     """, unsafe_allow_html=True)
 
     def display_header(self):
             logo_url = "https://planetsapling.com/files/dynamicContent/sites/niu3r9/images/en/webpage_15/m5liuyq2/element_665/rwdMode_1/464x434/6-removebg-preview.webp"
@@ -41,7 +32,7 @@ class WildfireAnalysisDashboard:
                     <h1 style="margin: 0;">LA Wildfire Impact App</h1>
                     <img src="{logo_url}" style="height: 60px;">
                 </div>
-                <p style="font-size: 14px; color: #444;">
+                <p style="font-size: 14px;">
                     The LA Wildfire Impact App is a tool created by PlanetSapling's LocalSolve Initiative for analyzing the vegetation conditions after the fires in January, 2025. 
                     This tool is meant for ecological restoration organisations, enabling them to prioritise response efforts and guide restoration plans. The app examines burn severity, 
                     vegetation damage, and invasive species, aiding in long-term response and recovery planning.
@@ -71,28 +62,6 @@ class WildfireAnalysisDashboard:
                      "5", 
                      "Expanding", delta_color="inverse")
 
-    # def display_footer(self):
-    #     st.markdown("""
-    #     <div style='text-align: center; padding: 1rem; background-color: #f0f4f7; border-radius: 0.5rem; margin-top: 1rem;'>
-    #         <p style='font-size: 14px; color: #444;'>
-    #             This app was created as part of the PlanetSapling LocalSolve Initiative by a group of Data Scientists: 
-    #             <br>
-    #             <strong>Ankur Shah (USA)</strong>, 
-    #             <strong>Magdalena Kortas (AU)</strong>,
-    #             <strong>Keenan Eves (USA)</strong>, 
-    #             <strong>Palak Agarwal (USA)</strong>, 
-    #             <strong>Manuel Alafaa (NGA)</strong>,
-    #             <strong>Aurelien Callens (FRA)</strong>,
-    #             <strong>Kabir Ahamad (CAN)</strong>
-    #             <strong>Vanesa Martin (USA)</strong>.
-    #         </p>
-
-    #         <p style='font-size: 14px; color: #444; margin-top: 10px;'>
-    #             Contact <strong>PlanetSapling</strong> to request the vegetation and urban tree species data files at 
-    #             <strong>contact(at)planetsapling.com</strong>.
-    #         </p>            
-    #     </div>
-    #     """, unsafe_allow_html=True)
 
     def display_footer(self):
         st.markdown("""
@@ -121,7 +90,6 @@ class WildfireAnalysisDashboard:
 
     def run(self):
         self.display_header()
-        #self.display_metrics()
 
         tab1, tab2, tab3, tab4 = st.tabs([
             "Burn Severity", 
