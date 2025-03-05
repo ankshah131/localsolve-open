@@ -138,7 +138,7 @@ class VegBurn:
                 "within each polygon. This helps in understanding the dominant fire effects on different "
                 "vegetation types.\n\n"
 
-                "Data source - Geospatial data for the Vegetation Mapping Inventory Project of Santa Monica" 
+                "Data source - Geospatial data for the Vegetation Mapping Inventory Project of Santa Monica " 
                 "Mountains National Recreation Area https://irma.nps.gov/DataStore/Reference/Profile/2272711"
 
             )
