@@ -19,7 +19,7 @@ class WildfireAnalysisDashboard:
         self.severity_analysis = SeverityAnalysis(self.data_loader)
         self.vegetation_analysis = VegetationAnalysis(self.data_loader)
         self.fire_progression = FireProgression(self.fire_data_loader)
-        self.veg_burn = VegBurn()
+        self.veg_burn = VegBurn(self.data_loader)
         self.invasive_species = InvasivesMap()
 
 
@@ -102,7 +102,7 @@ class WildfireAnalysisDashboard:
             self.severity_analysis.display()
         with tab2:
             self.veg_burn.display()
-            self.vegetation_analysis.display()
+         #   self.vegetation_analysis.display()
         with tab3:
             self.invasive_species.display()
         with tab4:
