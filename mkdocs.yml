@@ -1,0 +1,34 @@
+site_name: LocalSolve Open
+repo_url: https://github.com/ankshah131/localsolve-open
+theme:
+  name: material
+  icon:
+    logo: material/handshake-outline # TODO: replace with LocalSolve logo
+  features:
+    - navigation.tabs
+
+extra:
+  repo_url: https://github.com/ankshah131/localsolve-open
+  # slack_link: ... # TODO: Do we want to set other project-wide variables to be referenced multiple times, like the link to Slack?
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - index.md
+  - Get Involved:
+      - Home: get-involved/index.md
+      - Contributing: get-involved/contributing.md # TODO: Should be an orphaned page that is only refered to when discussing starting or contributing to projects?
+      - Resources: get-involved/resources.md
+  - about.md
+
+plugins:
+  - macros
+  - mkdocs-jupyter:
+      ignore_h1_titles: True
