@@ -39,7 +39,7 @@
 //                                     SET TIME FRAME
 
 // Set start and end dates of a period BEFORE the fire. Make sure it is long enough for 
-// Sentinel-2 to acquire an image (repitition rate = 5 days). Adjust these parameters, if
+// Sentinel-2 to acquire an image (repetition rate = 5 days). Adjust these parameters, if
 // your ImageCollections (see Console) do not contain any elements.
 var prefire_start = '2024-12-15';   
 var prefire_end = '2025-01-05';
@@ -54,13 +54,13 @@ var MAX_CLOUD_PROBABILITY = 65;
 //*******************************************************************************************
 //                            SELECT A SATELLITE PLATFORM
 
-// You can select remote sensing imagery from two availible satellite sensors. 
+// You can select remote sensing imagery from two available satellite sensors. 
 // Consider details of each mission below to choose the data suitable for your needs.
 
 // Landsat 8                             |  Sentinel-2 (A&B)
 //-------------------------------------------------------------------------------------------
 // launched:        February 11th, 2015  |  June 23rd, 2015 & March 7th, 2017
-// repitition rate: 16 days              |  5 day (since 2017)
+// repetition rate: 16 days              |  5 day (since 2017)
 // resolution:      30 meters            |  10 meters 
 // advantages:      longer time series   |  9 times higher spatial detail
 //                  smaller export file  |  higher chance of cloud-free images
@@ -274,7 +274,7 @@ Map.addLayer(post_cm_mos, vis,'Post-fire True Color Image - Clouds masked');
 
 var grey = ['white', 'black'];
 
-// Remove comment-symbols (//) below to display pre- and post-fire NBR seperately
+// Remove comment-symbols (//) below to display pre- and post-fire NBR separately
 //Map.addLayer(preNBR, {min: -1, max: 1, palette: grey}, 'Prefire Normalized Burn Ratio');
 //Map.addLayer(postNBR, {min: -1, max: 1, palette: grey}, 'Postfire Normalized Burn Ratio');
 
@@ -300,7 +300,7 @@ var sld_intervals =
 // Add the image to the map using both the color ramp and interval schemes.
 Map.addLayer(dNBR.sldStyle(sld_intervals), {}, 'dNBR classified');
 
-// Seperate result into 8 burn severity classes
+// separate result into 8 burn severity classes
 var thresholds = ee.Image([-1000, -251, -101, 99, 269, 439, 659, 2000]);
 var classified = dNBR.lt(thresholds).reduce('sum').toInt();
 
