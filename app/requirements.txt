@@ -4,6 +4,6 @@ pandas
 plotly 
 numpy
 Pillow 
-folium
+folium==0.19.7
 geopandas
 streamlit-folium==0.25.0
