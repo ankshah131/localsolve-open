@@ -223,7 +223,7 @@ class VegBurn:
                 if m is not None:
                     # Make map responsive by removing fixed width
                     #folium_static(m, width=None, height=600)
-                    folium_static(m, width=1000, height=600)
+                    folium_static(m, width=1200, height=600)
         
         with tabs[1]:
             st.subheader("How Burn Severity is Measured")
