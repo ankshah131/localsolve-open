@@ -140,7 +140,7 @@ class InvasivesMap:
                 m = self.create_map()
                 if m is not None:
                     # Adjusted map container to take full width
-                    folium_static(m, width=1320, height=600)
+                    folium_static(m, width=1330, height=600)
         
         with tabs[1]:
             st.subheader("How Burn Severity is Measured")
