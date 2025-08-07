@@ -6,4 +6,4 @@ numpy
 Pillow 
 folium
 geopandas
-streamlit_folium
+streamlit_folium=0.25.0
