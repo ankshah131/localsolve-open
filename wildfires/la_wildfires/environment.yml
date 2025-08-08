@@ -1,0 +1,15 @@
+name: la-wildfires
+channels:
+  - conda-forge
+dependencies:
+  # Core
+  - xarray
+  - cfgrib
+  - dask
+  - streamlit
+  - holoviews
+  - boto3
+  # Dev
+  - jupyterlab
+  - pre_commit
+  - pytest
